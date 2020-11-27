@@ -1,0 +1,18 @@
+.inputfieldmain{
+    align-items: center;
+    width: 50%;
+}
+
+.input {
+    
+    box-sizing: border-box;
+    outline: none;
+    border: solid 2px #1189de;
+    border-radius: 4px;
+    color: #292929;
+    width: 90%;
+    padding: 12px;
+    font-size: 14px;
+    margin: 5px;
+    background-color: rgba(255, 255, 255, 1);
+}

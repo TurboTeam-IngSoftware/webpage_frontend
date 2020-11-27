@@ -1,0 +1,29 @@
+.toolbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #083852;
+    height: 50px;
+}
+
+.toolbarnav{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 1rem;
+}
+
+.toolbarnavitems ul{
+    list-style: none;
+}
+
+.toolbarnavitems{
+    color: green;
+    text-decoration: none;
+}
+
+.toolbarnavitems:hover,
+.toolbarnavitems:active{
+    color: red;
+}
