@@ -6,6 +6,7 @@ import SearchBar from './components/SearchBar';
 import Header from './components/Header';
 import Home from './components/pages/Home';
 import LoginSect from './components/pages/LoginSect';
+import ArtiListSect from './components/pages/ArtiListSect'
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Switch>
         <Route path='/' exact component={Home}/>
         <Route path='/login' component={LoginSect}/>
+        <Route path='/articulos' component={ArtiListSect}/>
       </Switch>
     </Router>
     </div>
