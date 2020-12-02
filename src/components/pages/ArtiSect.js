@@ -15,7 +15,7 @@ function ArtiSect() {
                 <h1 className='arttitle'>{title}</h1>
                 <strong className='author'>{author}</strong>
                 <strong className='date'> {date}</strong>
-                <iframe title='A video' width="560" height="315" src={linkvideo} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe title='A video' width="560" height="315" src={linkvideo} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <div className='body'> {content}</div>
             </div>
         </>
