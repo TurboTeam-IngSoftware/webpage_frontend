@@ -1,5 +1,6 @@
-import React from 'react'
-import InputField from '../InputfieldComp'
+import React, { useState} from 'react'
+import Axios from 'axios'
+import {TextField} from '@material-ui/core'
 import ButtonComp from '../ButtonComp'
 import './LoginSect.css'
 import Icon from '../userimg.png'
@@ -25,22 +26,22 @@ function LoginSect() {
             <h1 className='title'>
                 Log In
             </h1>
-            <InputField
-                type='text'
-                placeholder='Email'
-                value={''}
-                onChange={(e) => {
-                    setEmail(e.target.value);
-                }}
+            <TextField
+            label="Email"
+            color="primary"
+            variant="filled"
+            onChange={(e) => {
+                setEmail(e.target.value);
+            }}
             />
-            <InputField
-                type='password'
-                placeholder='Password'
-                value={''}
-                onChange={(e) => {
-                    setPassword(e.target.value);
-                }}
-            />
+            <TextField
+            label="Contraseña"
+            color="primary"
+            variant="filled"
+            type="password"
+            onChange={(e) => {
+                setPassword(e.target.value);
+            }}/>
             <ButtonComp 
                 text={'Login'}
                 disabled={false}
