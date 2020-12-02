@@ -7,6 +7,7 @@ import Header from './components/Header';
 import Home from './components/pages/Home';
 import LoginSect from './components/pages/LoginSect';
 import ArtiListSect from './components/pages/ArtiListSect'
+import Artpg from './components/pages/ArtiSect'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path='/' exact component={Home}/>
         <Route path='/login' component={LoginSect}/>
         <Route path='/articulos' component={ArtiListSect}/>
+        <Route path='/artpg' component={Artpg}/>
       </Switch>
     </Router>
     </div>
