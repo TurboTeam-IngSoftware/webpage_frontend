@@ -7,7 +7,17 @@ import Icon from '../userimg.png'
 function LoginSect() {
 
     //Space for API functions
-    //Login function
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const login = () => {
+        Axios.post("http://skynet.lp.upb.edu/~pbruckner18/webpage_frontend/login", {
+            email: email,
+            password: password,
+    }).then((response) => {
+        console.log(response);
+    });
+    };
 
     return (
         <div className='containerlogin'>
@@ -17,20 +27,24 @@ function LoginSect() {
             </h1>
             <InputField
                 type='text'
-                placeholder='Username'
+                placeholder='Email'
                 value={''}
-                //onChange={(val) => do something}
+                onChange={(e) => {
+                    setEmail(e.target.value);
+                }}
             />
             <InputField
                 type='password'
                 placeholder='Password'
                 value={''}
-                //onChange={(val) => do something}
+                onChange={(e) => {
+                    setPassword(e.target.value);
+                }}
             />
             <ButtonComp 
                 text={'Login'}
                 disabled={false}
-                //onClick={() => this.doLogout() }     //need a function here
+                onClick={login}
              />
         </div>
     )
