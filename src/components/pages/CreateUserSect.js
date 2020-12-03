@@ -26,7 +26,7 @@ function CreateUserSect() {
     };
 
     return (
-        <div className='containerlogin'>
+        <div className='containercreateuser'>
              <img src={Icon} alt='icon' className='icon'/>
             <h1 className='title'>
                 Log In
