@@ -49,13 +49,7 @@ function ArtiListSect() {
         }, [])
     })
     const history = useHistory();
-
-    function handleClick(data) {
-        history.push({pathname: '/artpg', data: data});
-    }
-
-
-
+    
     return (
         <div style={{display: 'flex', justifyContent: 'center'}}>
             <GridList cellHeight={300} className={classes.gridList} cols={3}>
