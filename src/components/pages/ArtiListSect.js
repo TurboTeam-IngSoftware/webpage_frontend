@@ -9,6 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,6 +48,14 @@ function ArtiListSect() {
             console.log(err)
         }, [])
     })
+    const history = useHistory();
+
+    function handleClick(data) {
+        history.push({pathname: '/artpg', data: data});
+    }
+
+
+
     return (
         <div style={{display: 'flex', justifyContent: 'center'}}>
             <GridList cellHeight={300} className={classes.gridList} cols={3}>
@@ -56,7 +65,7 @@ function ArtiListSect() {
                             <CardActionArea className={classes.card}>
                                 <CardMedia
                                     className={classes.media}
-                                    image="/static/images/cards/contemplative-reptile.jpg"
+                                    image={post.photo}
                                     title={post.title}
                                 />
                                 <CardContent>
@@ -69,7 +78,7 @@ function ArtiListSect() {
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
-                                <Button size="small" color="primary">
+                                <Button size="small" color="primary" onClick={() => history.push({pathname: '/artpg', data: {title: post.title, description: post.description, author: post.author, date: post.date}})}>
                                     Ver más
                                 </Button>
                             </CardActions>
