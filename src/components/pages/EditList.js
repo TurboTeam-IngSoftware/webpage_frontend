@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,6 +7,13 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import {TextField} from '@material-ui/core';
+
 
 const columns = [
   { id: 'name', label: 'Name', minWidth: 170 },
@@ -65,12 +71,23 @@ const useStyles = makeStyles({
   container: {
     maxHeight: 440,
   },
+  formControl: {
+    margin: 10,
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: 10,
+  },
 });
 
 export default function EditList() {
-  const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const classes = useStyles();
+    const [query, setQuery] = React.useState('');
+    const handleChange = (event) => {
+    setQuery(event.target.value);
+  };
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -82,6 +99,33 @@ export default function EditList() {
   };
 
   return (
+      <div>
+        <div>
+        <TextField
+            label="Buscar"
+            color="primary"
+            variant="filled"
+            value={query}
+            onChange={(e) => {
+                setQuery(e.target.value);
+            }}/>
+    
+    <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Categoría</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={query}
+          onChange={handleChange}
+        >
+          <MenuItem value={'name'}>Name</MenuItem>
+          <MenuItem value={'code'}>Code</MenuItem>
+          <MenuItem value={'population'}>Population</MenuItem>
+        </Select>
+      </FormControl>
+
+
+    </div>
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
@@ -126,5 +170,6 @@ export default function EditList() {
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
     </Paper>
+    </div>
   );
 }
