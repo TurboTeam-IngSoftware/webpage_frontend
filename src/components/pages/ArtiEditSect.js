@@ -51,5 +51,4 @@ function ArtiEditSect() {
         </div>
     )
 }
-
 export default ArtiEditSect
