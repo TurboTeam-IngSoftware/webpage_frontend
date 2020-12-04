@@ -2,7 +2,7 @@ import React from 'react'
 import InputField from '../InputfieldComp'
 import ButtonComp from '../ButtonComp'
 import './ArtiEditSect.css'
-import Icon from '../userimg.png'
+
 
 function ArtiEditSect() {
 
@@ -12,7 +12,6 @@ function ArtiEditSect() {
 
     return (
         <div className='containerArtiEdit'>
-            <img src={Icon} alt='icon' className='icon'/>
         <h1 className='title'>
             Título
         </h1>
