@@ -8,6 +8,8 @@ import Home from './components/pages/Home';
 import LoginSect from './components/pages/LoginSect';
 import ArtiListSect from './components/pages/ArtiListSect'
 import Artpg from './components/pages/ArtiSect'
+import ListaUsuarios from './components/pages/AdminList'
+import CreateUser from './components/pages/CreateUserSect'
 
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
         <Route path='/login' component={LoginSect}/>
         <Route path='/articulos' component={ArtiListSect}/>
         <Route path='/artpg' component={Artpg}/>
+        <Route path='/listausuarios' component={ListaUsuarios}/>
+        <Route path='/crearusuario' component={CreateUser}/>
       </Switch>
     </Router>
     </div>
