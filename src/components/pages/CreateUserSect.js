@@ -1,4 +1,5 @@
 import React from 'react'
+import Axios from 'axios'
 import InputField from '../InputfieldComp'
 import ButtonComp from '../ButtonComp'
 import './CreateUserSect.css'
@@ -14,7 +15,7 @@ function CreateUserSect() {
     const [roleReg, setRoleReg] = useState("");
 
     const createUser = () => {
-        Axios.post("http://skynet.lp.upb.edu/~pbruckner18/webpage_frontend/createUser", {
+        Axios.post('/webpage_backend/createUser', {
             email: emailReg,
             names: namesReg,
             lastnames: lastNamesReg,
