@@ -1,6 +1,7 @@
 {
   "name": "blog",
   "version": "0.1.0",
+  "proxy": "http://skynet.lp.upb.edu/~pbruckner18",
   "homepage": ".",
   "private": true,
   "dependencies": {

@@ -80,7 +80,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function EditList() {
+export default function AdminList() {
     const classes = useStyles();
     const [query, setQuery] = React.useState('');
     const handleChange = (event) => {

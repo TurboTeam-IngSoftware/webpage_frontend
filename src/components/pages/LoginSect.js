@@ -12,11 +12,22 @@ function LoginSect() {
     const [password, setPassword] = useState("");
 
     const login = () => {
-        Axios.post("http://skynet.lp.upb.edu/~pbruckner18/webpage_frontend/login", {
-            email: email,
-            password: password,
+        Axios.post('/webpage_backend/login', {
+            "email": email,
+            "password": password,
     }).then((response) => {
-        console.log(response);
+        console.log(response.data);
+        if(response.data.status==='error'){
+            console.log("im an error")
+        }else{
+            localStorage.setItem('token', response.token)
+            localStorage.setItem('role', response.data[0].roles)
+            localStorage.setItem('name', response.data[0].names)
+            localStorage.setItem('lastnm', response.data[0].lastnames)
+            console.log(localStorage.getItem('role'))
+            console.log(localStorage.getItem('name'))
+            console.log(localStorage.getItem('lastnm'))
+        }
     });
     };
 

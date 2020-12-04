@@ -8,7 +8,6 @@ import Home from './components/pages/Home';
 import LoginSect from './components/pages/LoginSect';
 import ArtiListSect from './components/pages/ArtiListSect'
 import Artpg from './components/pages/ArtiSect'
-import EditList from './components/pages/EditList'
 
 
 function App() {
@@ -22,7 +21,6 @@ function App() {
         <Route path='/login' component={LoginSect}/>
         <Route path='/articulos' component={ArtiListSect}/>
         <Route path='/artpg' component={Artpg}/>
-        <Route path='/editart' component={EditList}/>
       </Switch>
     </Router>
     </div>
