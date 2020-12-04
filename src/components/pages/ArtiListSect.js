@@ -10,6 +10,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { useHistory } from 'react-router-dom';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import {TextField} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    formControl: {
+        margin: 10,
+        minWidth: 120,
+      },
     media: {
         height: 140,
     },
@@ -39,7 +48,7 @@ function ArtiListSect() {
     const [posts, setPosts]= useState([]);
     const classes = useStyles();
     useEffect(()=> {
-        axios.get('http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/posts')
+        axios.get('/webpage_backend/posts')
         .then (res => {
             console.log(res)
             setPosts(res.data)
@@ -49,9 +58,37 @@ function ArtiListSect() {
         }, [])
     })
     const history = useHistory();
-    
+    const [query, setQuery] = React.useState('');
+    const handleChange = (event) => {
+        setQuery(event.target.value);
+      };
+      console.log(localStorage.getItem('name'))
     return (
-        <div style={{display: 'flex', justifyContent: 'center'}}>
+        
+        <div style={{display: 'flex', justifyContent: 'center', flexDirection:'column', background:'bleachedalmond'}}>
+              <TextField
+            label="Buscar"
+            color="primary"
+            variant="filled"
+            value={query}
+            onChange={(e) => {
+                setQuery(e.target.value);
+            }}/>
+    
+    <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Categoría</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={query}
+          onChange={handleChange}
+        >
+          <MenuItem value={'name'}>Name</MenuItem>
+          <MenuItem value={'code'}>Code</MenuItem>
+          <MenuItem value={'population'}>Population</MenuItem>
+        </Select>
+      </FormControl>
+
             <GridList cellHeight={300} className={classes.gridList} cols={3}>
                 {posts.map((post) => (
                     <div className={classes.card}>
