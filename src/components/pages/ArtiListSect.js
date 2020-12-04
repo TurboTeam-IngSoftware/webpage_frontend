@@ -64,7 +64,6 @@ function ArtiListSect() {
       };
       console.log(localStorage.getItem('name'))
     return (
-        
         <div style={{display: 'flex', justifyContent: 'center', flexDirection:'column', background:'bleachedalmond'}}>
               <TextField
             label="Buscar"
@@ -90,7 +89,7 @@ function ArtiListSect() {
       </FormControl>
 
             <GridList cellHeight={300} className={classes.gridList} cols={3}>
-                {posts.map((post) => (
+                {posts.map((post) => (        
                     <div className={classes.card}>
                         <Card className={classes.root}>
                             <CardActionArea className={classes.card}>

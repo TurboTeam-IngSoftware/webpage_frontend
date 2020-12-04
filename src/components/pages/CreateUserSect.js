@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState} from 'react'
 import Axios from 'axios'
-import InputField from '../InputfieldComp'
+import {TextField} from '@material-ui/core'
 import ButtonComp from '../ButtonComp'
 import './CreateUserSect.css'
 import Icon from '../userimg.png'
@@ -32,46 +32,53 @@ function CreateUserSect() {
             <h1 className='title'>
                 Log In
             </h1>
-            <InputField
-                type='text'
-                placeholder='Email'
-                value={''}
-                onChange={(e) => {
-                    setEmailReg(e.target.value);
-                }}
+
+            <TextField
+            type='text'
+            label="Email"
+            color="primary"
+            variant="filled"
+            onChange={(e) => {
+                setEmailReg(e.target.value);
+            }}
             />
-            <InputField
-                type='text'
-                placeholder='Names'
-                value={''}
-                onChange={(e) => {
-                    setNamesReg(e.target.value);
-                }}
+             <TextField
+            type='text'
+            label="Nombre"
+            color="primary"
+            variant="filled"
+            onChange={(e) => {
+                setNamesReg(e.target.value);
+            }}
             />
-            <InputField
-                type='text'
-                placeholder='Last Names'
-                value={''}
-                onChange={(e) => {
-                    setLastNamesReg(e.target.value);
-                }}
+             <TextField
+            type='text'
+            label="Apellido"
+            color="primary"
+            variant="filled"
+            onChange={(e) => {
+                setLastNamesReg(e.target.value);
+            }}
             />
-            <InputField
-                type='password'
-                placeholder='Password'
-                value={''}
-                onChange={(e) => {
-                    setPasswordReg(e.target.value);
-                }}
+             <TextField
+            type='text'
+            label="Contraseña"
+            color="primary"
+            variant="filled"
+            onChange={(e) => {
+                setPasswordReg(e.target.value);
+            }}
             />
-            <InputField
-                type='int'
-                placeholder='Role'
-                value={''}
-                onChange={(e) => {
-                    setRoleReg(e.target.value);
-                }}
+             <TextField
+            type='text'
+            label="Rol"
+            color="primary"
+            variant="filled"
+            onChange={(e) => {
+                setRoleReg(e.target.value);
+            }}
             />
+
             <ButtonComp 
                 text={'Create User'}
                 disabled={false}

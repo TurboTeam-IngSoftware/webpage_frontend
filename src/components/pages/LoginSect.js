@@ -43,8 +43,8 @@ function LoginSect() {
         console.log(localStorage.getItem('lastnm'))
     
     };
-
-    if(localStorage.getItem('name') !== ''){
+    if (localStorage.getItem('role') == 1){
+        console.log('estoy aca')
         return (
             <div className='containerlogin'>
             <img src={Icon} alt='icon' className='icon'/>
@@ -58,8 +58,31 @@ function LoginSect() {
                 onClick={logout}
              />
              </Link>
+             <Link to ='/listausuarios' >
+           <ButtonComp 
+                text={'Ver Usuarios'}
+                disabled={false}
+                //onClick={logout}
+             />
+             </Link>
              </div>
         )
+        }else if(localStorage.getItem('name') !== ''){
+            return (
+                <div className='containerlogin'>
+                <img src={Icon} alt='icon' className='icon'/>
+               <h1 className='title'>
+                   Log Out
+               </h1> 
+               <Link to ='/login' >
+               <ButtonComp 
+                    text={'Logout'}
+                    disabled={false}
+                    onClick={logout}
+                 />
+                 </Link>
+                 </div>
+            )
     }else{
     return (
         <div className='containerlogin'>
