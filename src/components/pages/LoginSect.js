@@ -4,9 +4,11 @@ import {TextField} from '@material-ui/core'
 import ButtonComp from '../ButtonComp'
 import './LoginSect.css'
 import Icon from '../userimg.png'
+import { Link } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 function LoginSect() {
-
+    let history = useHistory();
     //Space for API functions
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -27,10 +29,38 @@ function LoginSect() {
             console.log(localStorage.getItem('role'))
             console.log(localStorage.getItem('name'))
             console.log(localStorage.getItem('lastnm'))
+            history.push('/')
         }
     });
     };
 
+    const logout = () => {
+        localStorage.setItem('role', '')
+        localStorage.setItem('name', '')
+        localStorage.setItem('lastnm', '')
+        console.log(localStorage.getItem('role'))
+        console.log(localStorage.getItem('name'))
+        console.log(localStorage.getItem('lastnm'))
+    
+    };
+
+    if(localStorage.getItem('name') !== ''){
+        return (
+            <div className='containerlogin'>
+            <img src={Icon} alt='icon' className='icon'/>
+           <h1 className='title'>
+               Log Out
+           </h1> 
+           <Link to ='/login' >
+           <ButtonComp 
+                text={'Logout'}
+                disabled={false}
+                onClick={logout}
+             />
+             </Link>
+             </div>
+        )
+    }else{
     return (
         <div className='containerlogin'>
              <img src={Icon} alt='icon' className='icon'/>
@@ -60,6 +90,7 @@ function LoginSect() {
              />
         </div>
     )
+    }
 }
 
 export default LoginSect
