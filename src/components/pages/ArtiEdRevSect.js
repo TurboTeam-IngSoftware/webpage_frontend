@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function ArtiListSect() {
+function ArtiEdRevSect() {
     const [posts, setPosts]= useState([]);
     const classes = useStyles();
     useEffect(()=> {
@@ -62,7 +62,6 @@ function ArtiListSect() {
     const handleChange = (event) => {
         setQuery(event.target.value);
       };
-      console.log(localStorage.getItem('name'))
     return (
         <div style={{display: 'flex', justifyContent: 'center', flexDirection:'column', background:'bleachedalmond'}}>
               <TextField
@@ -89,7 +88,7 @@ function ArtiListSect() {
       </FormControl>
 
             <GridList cellHeight={300} className={classes.gridList} cols={3}>
-                {posts.filter(post => post.revised === "1").map(post =>   (
+                {posts.map(post =>   (
 
                     
 
@@ -123,4 +122,4 @@ function ArtiListSect() {
     )
 }
 
-export default ArtiListSect
+export default ArtiEdRevSect

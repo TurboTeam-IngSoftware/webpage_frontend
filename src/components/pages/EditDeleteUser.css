@@ -1,0 +1,19 @@
+.containerdeledit{
+    background-color: blanchedalmond;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 100%;
+    align-content: center;
+    align-items: center;
+
+}
+
+.title{
+    margin: 10px;
+    color: #083852;
+}
+.icon{
+    height: 15%;
+    width: 15%;
+}

@@ -10,6 +10,9 @@ import ArtiListSect from './components/pages/ArtiListSect'
 import Artpg from './components/pages/ArtiSect'
 import ListaUsuarios from './components/pages/AdminList'
 import CreateUser from './components/pages/CreateUserSect'
+import EdicionUsurio from './components/pages/EditDeleteUsers'
+import ArtiDelRev from './components/pages/ArtiEdRevSect'
+import CrearArti from './components/pages/ArtiEditSect'
 
 
 function App() {
@@ -25,6 +28,9 @@ function App() {
         <Route path='/artpg' component={Artpg}/>
         <Route path='/listausuarios' component={ListaUsuarios}/>
         <Route path='/crearusuario' component={CreateUser}/>
+        <Route path='/edicionusuario'component={EdicionUsurio}/>
+        <Route path = '/artireded' component = {ArtiDelRev}/>
+        <Route path= '/creararti' component = {CrearArti}/>
       </Switch>
     </Router>
     </div>

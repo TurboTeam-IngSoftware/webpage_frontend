@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react'
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,31 +8,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import {TextField} from '@material-ui/core';
 import ButtonComp from '../ButtonComp'
 import { Link } from 'react-router-dom';
+import axios from 'axios'
+import { useHistory } from 'react-router-dom';
 
-
-const columns = [
-  { id: 'nombre', label: 'Nombre', minWidth: 170 },
-  { id: 'apellido', label: 'Apellido', minWidth: 170 },
-  { id: 'email', label: 'Email', minWidth: 200 },
-  { id: 'role', label: 'Rol', minWidth: 100 },
-];
-
-function createData(nombre, apellido, email, role) {
-  return { nombre, apellido, email, role };
-}
-
-const rows = [
-  createData('Ken', 'Hervas', 'ken@herbas.com', '3'),
-  createData('Patrick', 'Bruckner', 'pat@bruck.com', '2'),
-  createData('Jordi', 'Ugarte', 'jordi@ugarte.com', '1'),
-];
 
 const useStyles = makeStyles({
   root: {
@@ -51,11 +31,23 @@ const useStyles = makeStyles({
 });
 
 export default function AdminList() {
+
+
+  const [users, setUsers]= useState([]);
+    useEffect(()=> {
+        axios.get('/webpage_backend/users')
+        .then (res => {
+            console.log(res)
+            setUsers(res.data)
+        })
+        .catch (err => {
+            console.log(err)
+        }, [])
+    })
+    const history = useHistory();
+
     const classes = useStyles();
-    const [query, setQuery] = React.useState('');
-    const handleChange = (event) => {
-    setQuery(event.target.value);
-  };
+    
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -73,70 +65,79 @@ export default function AdminList() {
   }
   return (
       <div>
-        <div>
-        <TextField
-            label="Buscar"
-            color="primary"
-            variant="filled"
-            value={query}
-            onChange={(e) => {
-                setQuery(e.target.value);
-            }}/>
-    
-    <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Categoría</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={query}
-          onChange={handleChange}
-        >
-          <MenuItem value={'name'}>Name</MenuItem>
-          <MenuItem value={'code'}>Code</MenuItem>
-          <MenuItem value={'population'}>Population</MenuItem>
-        </Select>
-      </FormControl>
-
-
-    </div>
+        
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
+            <TableCell align={'center'}
+                  style={{ minWidth: 100 }}>
+                  ID
+             </TableCell>
+             <TableCell align={'center'}
+                  style={{ minWidth: 100 }}>
+                  Nombre
+             </TableCell>
+             <TableCell align={'center'}
+                  style={{ minWidth: 100 }}>
+                  Apellido
+             </TableCell>
+             <TableCell align={'center'}
+                  style={{ minWidth: 100 }}>
+                  Email
+             </TableCell>
+             <TableCell align={'center'}
+                  style={{ minWidth: 100 }}>
+                  Roles
+             </TableCell>
+             <TableCell align={'center'}
+                  style={{ minWidth: 100 }}>
+                  Opciones
+             </TableCell>
+
+          </TableHead> 
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
-                      </TableCell>
-                    );
-                  })}
+              {users.map((user) => (
+                <TableRow
+                  align={'center'}
+                  style={{ minWidth: 100 }}
+                >
+                  <TableCell align={'center'}
+                  style={{ minWidth: 100 }}>
+                  {user.idUser}
+                  </TableCell>
+                  <TableCell align={'center'}
+                  style={{ minWidth: 100 }}>
+                  {user.names}
+                  </TableCell>
+                  <TableCell align={'center'}
+                  style={{ minWidth: 100 }}>
+                  {user.lastnames}
+                  </TableCell>
+                  <TableCell align={'center'}
+                  style={{ minWidth: 100 }}>
+                  {user.email}
+                  </TableCell>
+                  <TableCell align={'center'}
+                  style={{ minWidth: 100 }}>
+                  {user.roles}
+                  </TableCell>
+                  <TableCell align={'center'}
+                  style={{ minWidth: 100 }}>
+                  <ButtonComp 
+                text={'Editar Usuario'}
+                disabled={false}
+                onClick={() => history.push({pathname: '/edicionusuario', data: {idUser: user.idUser, email: user.email, names: user.names, lastnames: user.lastnames, password: user.password, roles: user.roles}})}
+                 />
+                  </TableCell>
                 </TableRow>
-              );
-            })}
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}
