@@ -1,13 +1,21 @@
 import React, { useState} from 'react'
 import Axios from 'axios'
 import {TextField} from '@material-ui/core'
-import ButtonComp from '../ButtonComp'
 import './LoginSect.css'
 import Icon from '../userimg.png'
+import ButtonComp from '../ButtonComp'
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 
 function LoginSect() {
+    const next = (e) => {
+        console.log('Me voy a la lista de usuarios')
+    }
+
+    const isAdmin = localStorage.getItem('role') === "1"
+    const isEditor = localStorage.getItem('role') === "2"
+
+
     let history = useHistory();
     //Space for API functions
     const [email, setEmail] = useState("");
@@ -43,7 +51,7 @@ function LoginSect() {
         console.log(localStorage.getItem('lastnm'))
     
     };
-    if (localStorage.getItem('role') == 1){
+    if (localStorage.getItem('name') !== ''){
         console.log('estoy aca')
         return (
             <div className='containerlogin'>
@@ -58,32 +66,32 @@ function LoginSect() {
                 onClick={logout}
              />
              </Link>
+             <Link to ='/artireded' >
+           <ButtonComp 
+                text={'Artículos'}
+                disabled={false}
+                onClick={next}
+             />
+             </Link>
+             {isAdmin &&
              <Link to ='/listausuarios' >
            <ButtonComp 
                 text={'Ver Usuarios'}
                 disabled={false}
-                //onClick={logout}
+                onClick={next}
              />
-             </Link>
+             </Link>}
+             {isEditor &&
+             <Link to ='/creararti' >
+           <ButtonComp 
+                text={'Crear Artículo'}
+                disabled={false}
+                onClick={next}
+             />
+             </Link>}
              </div>
         )
-        }else if(localStorage.getItem('name') !== ''){
-            return (
-                <div className='containerlogin'>
-                <img src={Icon} alt='icon' className='icon'/>
-               <h1 className='title'>
-                   Log Out
-               </h1> 
-               <Link to ='/login' >
-               <ButtonComp 
-                    text={'Logout'}
-                    disabled={false}
-                    onClick={logout}
-                 />
-                 </Link>
-                 </div>
-            )
-    }else{
+        }else{
     return (
         <div className='containerlogin'>
              <img src={Icon} alt='icon' className='icon'/>
