@@ -13,6 +13,7 @@ import CreateUser from './components/pages/CreateUserSect'
 import EdicionUsurio from './components/pages/EditDeleteUsers'
 import ArtiDelRev from './components/pages/ArtiEdRevSect'
 import CrearArti from './components/pages/ArtiEditSect'
+import EditArti from './components/pages/ArtiAlterSect'
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path='/edicionusuario'component={EdicionUsurio}/>
         <Route path = '/artireded' component = {ArtiDelRev}/>
         <Route path= '/creararti' component = {CrearArti}/>
+        <Route path= '/editarti' component = {EditArti}/>
       </Switch>
     </Router>
     </div>
