@@ -68,7 +68,7 @@ function LoginSect() {
              </Link>
              <Link to ='/artireded' >
            <ButtonComp 
-                text={'Artículos'}
+                text={'Todos los Artículos'}
                 disabled={false}
                 onClick={next}
              />

@@ -3,20 +3,24 @@ import React, { useState} from 'react'
 import ButtonComp from '../ButtonComp'
 import { Link } from 'react-router-dom';
 import {TextField} from '@material-ui/core'
+import { useLocation } from "react-router-dom";
 import Axios from 'axios'
 
 
-function ArtiEditSect() {
-
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-    const [video, setVideo] = useState("");
-    const [descripcorta, setDescripCorta] = useState("");
+function ArtiAlterSect() {
+    
+    const location = useLocation();
+    const post = location.data;
+    const [title, setTitle] = useState(post.title);
+    const [content, setContent] = useState(post.description);
+    const [video, setVideo] = useState(post.video);
+    const [descripcorta, setDescripCorta] = useState(post.shortDescription);
     const today = new Date();
-    //const [imageSelected, setImageSelected] = useState("");
+   
 
     const publish = () => {
-        Axios.post("/webpage_backend/posts", {
+        Axios.put("/webpage_backend/posts", {
+            idPost: post.idPost,
             title: title,
             shortDescription: descripcorta,
             description: content,
@@ -32,27 +36,14 @@ function ArtiEditSect() {
     };
     
 
-   // const uploadImage = () => {
-     //   Axios.post('/webpage_backend/photosUp', {
-       //     "imageSelected": imageSelected,
-    //}).then((response) => {
-      //  console.log(response.data);
-    //    }
-    //)}
-
-     //   <ButtonComp 
-     //text={'Subir imagen'}
-     //disabled={false}
-     //onClick={uploadImage}
-///>
-
     return (
         <div className='containerArtiEdit'>
         <h1 className='title'>
-            Nuevo Artículo
+            Editando Artículo
         </h1>
         <TextField
             type='text'
+            defaultValue={post.title}
             label="Título"
             color="primary"
             variant="filled"
@@ -60,15 +51,16 @@ function ArtiEditSect() {
                 setTitle(e.target.value);
             }}
             />
-             <TextField
-            type='text'
-            label="Descripción Corta"
-            color="primary"
-            variant="filled"
-            onChange={(e) => {
-                setDescripCorta(e.target.value);
-            }}
-            />
+        <TextField
+        type='text'
+        label="Descripción Corta"
+        defaultValue={post.shortDescription}
+        color="primary"
+        variant="filled"
+        onChange={(e) => {
+            setDescripCorta(e.target.value);
+        }}
+        />
         <h1 className='content'>
             Contenido
         </h1>
@@ -76,6 +68,7 @@ function ArtiEditSect() {
           id="standard-textarea"
           label="Contenido"
           placeholder="Contenido"
+          defaultValue={post.description}
           multiline
           fullWidth
           onChange={(e) => {
@@ -88,6 +81,7 @@ function ArtiEditSect() {
         <TextField
             type='text'
             label="Link de video"
+            defaultValue={post.video}
             color="primary"
             variant="filled"
             height="100%"
@@ -95,10 +89,9 @@ function ArtiEditSect() {
                 setVideo(e.target.value);
             }}
             />
-           
         <Link to ='/artireded' >
             <ButtonComp 
-                text={'Publicar'}
+                text={'Actualizar'}
                 disabled={false}
                 onClick={publish}
              />
@@ -106,4 +99,4 @@ function ArtiEditSect() {
     </div>
     )
 }
-export default ArtiEditSect
+export default ArtiAlterSect

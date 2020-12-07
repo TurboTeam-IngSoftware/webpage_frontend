@@ -10,13 +10,16 @@ import { useLocation } from "react-router-dom";
 function EditDeleteUsers() {
     const location = useLocation();
     //Space for API functions
-    const [emailReg, setEmailReg] = useState("");
-    const [namesReg, setNamesReg] = useState("");
-    const [lastNamesReg, setLastNamesReg] = useState("");
-    const [passwordReg, setPasswordReg] = useState("");
-    const [roleReg, setRoleReg] = useState("");
     const user = location.data
+    const [emailReg, setEmailReg] = useState(user.email);
+    const [namesReg, setNamesReg] = useState(user.names);
+    const [lastNamesReg, setLastNamesReg] = useState(user.lastnames);
+    const [passwordReg, setPasswordReg] = useState(user.password);
+    const [roleReg, setRoleReg] = useState(user.roles);
+    
    
+   
+
     const editUser = () => {
         Axios.put('/webpage_backend/users', {
             idUser: user.idUser,
@@ -31,12 +34,15 @@ function EditDeleteUsers() {
     };
 
     const deleteUser = () => {
-        const url = '/webpage_backend/users/$'+user.idUser;
-        console.log(url)
-        Axios.delete(url).then((response) => {
+        Axios.delete('/webpage_backend/users', {
+            data:{
+            idUser: user.idUser
+            }
+        }).then((response) => {
         console.log(response);
     });
     };
+   
 
     return (
         <div className='containerdeledit'>
@@ -44,28 +50,11 @@ function EditDeleteUsers() {
             <h1 className='title'>
                 Editar Usuario
             </h1>
-            <div>
-                información actual:
-            </div>
-            <div>
-                Email: {user.email}
-            </div>
-            <div>
-                Nombre: {user.names}
-            </div>
-            <div>
-                Apellido: {user.lastnames}
-            </div>
-            <div>
-                Contraseña: {user.password}
-            </div>
-            <div>
-                Rol: {user.roles}
-            </div>
 
             <TextField
             type='text'
             label="Email"
+            defaultValue={user.email}
             color="primary"
             variant="filled"
             onChange={(e) => {
@@ -75,6 +64,7 @@ function EditDeleteUsers() {
              <TextField
             type='text'
             label="Nombre"
+            defaultValue={user.names}
             color="primary"
             variant="filled"
             onChange={(e) => {
@@ -84,6 +74,7 @@ function EditDeleteUsers() {
              <TextField
             type='text'
             label="Apellido"
+            defaultValue={user.lastnames}
             color="primary"
             variant="filled"
             onChange={(e) => {
@@ -93,6 +84,7 @@ function EditDeleteUsers() {
              <TextField
             type='text'
             label="Contraseña"
+            defaultValue={user.password}
             color="primary"
             variant="filled"
             onChange={(e) => {
@@ -102,6 +94,7 @@ function EditDeleteUsers() {
              <TextField
             type='text'
             label="Rol"
+            defaultValue={user.roles}
             color="primary"
             variant="filled"
             onChange={(e) => {

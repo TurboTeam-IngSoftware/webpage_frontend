@@ -111,7 +111,7 @@ function ArtiListSect() {
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
-                                <Button size="small" color="primary" onClick={() => history.push({pathname: '/artpg', data: {title: post.title, description: post.description, author: post.author, date: post.date}})}>
+                                <Button size="small" color="primary" onClick={() => history.push({pathname: '/artpg', data: {idPost: post.idPost, title: post.title, shortDescription: post.shortDescription, description: post.description, author: post.author, date: post.date, photo: post.photo, category: post.category, revised: post.revised, video: post.video}})}>
                                     Ver más
                                 </Button>
                             </CardActions>
