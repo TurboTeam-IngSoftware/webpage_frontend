@@ -32,6 +32,7 @@ const useStyles = makeStyles({
 
 export default function AdminList() {
 
+  const isLogged = localStorage.getItem('role') !== "";
 
   const [users, setUsers]= useState([]);
     useEffect(()=> {
@@ -64,8 +65,10 @@ export default function AdminList() {
     console.log('me voy a la siguiente')
   }
   return (
+    
       <div>
-        
+      { isLogged ? 
+      <div>
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
@@ -151,6 +154,9 @@ export default function AdminList() {
                 onClick={next}
              />
     </Link>
+    </div>
+    : <div> No Tiene Permisos</div>
+              }
     </div>
   );
 }

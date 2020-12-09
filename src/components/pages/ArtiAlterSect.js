@@ -19,6 +19,8 @@ function ArtiAlterSect() {
    
 
     const publish = () => {
+        
+
         Axios.put("/webpage_backend/posts", {
             idPost: post.idPost,
             title: title,
@@ -29,14 +31,18 @@ function ArtiAlterSect() {
             photo: "http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/storage/images/posts/serj.jpg",
             category: "economia",
             revised: "0",
-            video: video,
+            video: "https://www.youtube.com/embed/"+video.split("=")[1],
     }).then((response) => {
         console.log(response);
     });
     };
+
+    const isLogged = localStorage.getItem('role') !== "";
     
 
     return (
+        <div>
+        {isLogged ? 
         <div className='containerArtiEdit'>
         <h1 className='title'>
             Editando Artículo
@@ -87,6 +93,7 @@ function ArtiAlterSect() {
             height="100%"
             onChange={(e) => {
                 setVideo(e.target.value);
+                console.log(video.split("=")[1]);
             }}
             />
         <Link to ='/artireded' >
@@ -97,6 +104,8 @@ function ArtiAlterSect() {
              />
         </Link>
     </div>
-    )
+    : <div> No Tiene Permisos</div> }
+        </div>
+    );
 }
 export default ArtiAlterSect
