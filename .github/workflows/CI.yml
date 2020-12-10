@@ -26,6 +26,7 @@ jobs:
         uses: amitsingh-007/deploy-to-github-pages@v1.1
         env:
           CI: false
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         
 
         
