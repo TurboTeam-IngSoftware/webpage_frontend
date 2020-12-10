@@ -1,10 +1,11 @@
 import React from 'react'
 import './Header.css';
+import hdrimg from '../header.png'
 
 function Header() {
     return (
         <div>
-            <img src={process.env.PUBLIC_URL + '/header.png'} alt='headimg' className='headimg'/>
+            <img src={hdrimg} alt='headimg' className='headimg'/>
         </div>
     )
 }
