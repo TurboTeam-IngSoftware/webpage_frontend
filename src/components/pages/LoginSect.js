@@ -2,7 +2,6 @@ import React, { useState} from 'react'
 import Axios from 'axios'
 import {TextField} from '@material-ui/core'
 import './LoginSect.css'
-import Icon from '../userimg.png'
 import ButtonComp from '../ButtonComp'
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
@@ -55,7 +54,7 @@ function LoginSect() {
         console.log('estoy aca')
         return (
             <div className='containerlogin'>
-            <img src={Icon} alt='icon' className='icon'/>
+            <img src={process.env.PUBLIC_URL+'/userimg.png'} alt='icon' className='icon'/>
            <h1 className='title'>
                Log Out
            </h1> 
