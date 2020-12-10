@@ -4,8 +4,6 @@
 name: CI
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -28,3 +26,12 @@ jobs:
     - run: npm run build --if-present
       env:
         CI: false
+    - name: Deploy to GH Pages
+      run: |
+          git config --global user.name "0WLB34R"
+          git config --global user.email "knhrvs@gmail.com"
+          git remote add build 'https://github.com/TurboTeam-IngSoftware/webpage_build.git'
+          git add -A
+          git commit -m "Updated Webpage"
+          git push build main
+        
