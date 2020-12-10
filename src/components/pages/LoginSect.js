@@ -12,6 +12,10 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 function LoginSect() {
     const next = (e) => {
@@ -21,9 +25,7 @@ function LoginSect() {
     const isAdmin = localStorage.getItem('role') === "1"
     const isEditor = localStorage.getItem('role') === "2"
 
-
     let history = useHistory();
-    //Space for API functions
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [open, setOpen] = React.useState(false);
@@ -41,8 +43,12 @@ function LoginSect() {
         return expression.test(String(email).toLowerCase());
     }
 
+    const validatePassword = (password) => {
+        return password.length >= 8;
+    }
+
     const login = () => {
-        if (validateEmail(email)) {
+        if (validateEmail(email) && validatePassword(password)) {
             Axios.post('/webpage_backend/login', {
                 "email": email,
                 "password": password,
@@ -52,6 +58,7 @@ function LoginSect() {
                     console.log("No se pudo iniciar sesión");
                     handleClickOpen();
                 }else{
+                    console.log("Se pudo iniciar sesión");
                     localStorage.setItem('token', response.token)
                     localStorage.setItem('role', response.data[0].roles)
                     localStorage.setItem('name', response.data[0].names)
@@ -67,6 +74,27 @@ function LoginSect() {
         }
         
     };
+    const useStyles = makeStyles((theme) => ({
+        paper: {
+            marginTop: theme.spacing(8),
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+        },
+        avatar: {
+            margin: theme.spacing(1),
+            backgroundColor: theme.palette.secondary.main,
+        },
+        form: {
+            width: '100%',
+            marginTop: theme.spacing(1),
+        },
+        submit: {
+            margin: theme.spacing(3, 0, 2),
+        },
+    }));
+
+    const classes = useStyles();
 
     const logout = () => {
         localStorage.setItem('role', '')
@@ -78,93 +106,112 @@ function LoginSect() {
     
     };
     if (localStorage.getItem('name') !== ''){
-        console.log('estoy aca')
-        return (
+        return(
             <div className='containerlogin'>
-            <img src={Icon} alt='icon' className='icon'/>
-           <h1 className='title'>
-               Log Out
-           </h1> 
-           <Link to ='/login' >
-           <ButtonComp 
-                text={'Logout'}
-                disabled={false}
-                onClick={logout}
-             />
-             </Link>
-             <Link to ='/artireded' >
-           <ButtonComp 
-                text={'Todos los Artículos'}
-                disabled={false}
-                onClick={next}
-             />
-             </Link>
-             {isAdmin &&
-             <Link to ='/listausuarios' >
-           <ButtonComp 
-                text={'Ver Usuarios'}
-                disabled={false}
-                onClick={next}
-             />
-             </Link>}
-             {isEditor &&
-             <Link to ='/creararti' >
-           <ButtonComp 
-                text={'Crear Artículo'}
-                disabled={false}
-                onClick={next}
-             />
-             </Link>}
-             </div>
+                <img src={Icon} alt='icon' className='icon'/>
+                <h1 className='title'>Log Out</h1> 
+                <Link to ='/login' >
+                <ButtonComp 
+                    text={'Logout'}
+                    disabled={false}
+                    onClick={logout}
+                />
+                </Link>
+                <Link to ='/artireded' >
+                <ButtonComp 
+                    text={'Todos los Artículos'}
+                    disabled={false}
+                    onClick={next}
+                />
+                </Link>
+                {isAdmin &&
+                <Link to ='/listausuarios' >
+                <ButtonComp 
+                    text={'Ver Usuarios'}
+                    disabled={false}
+                    onClick={next}
+                />
+                </Link>}
+                {isEditor &&
+                <Link to ='/creararti' >
+                <ButtonComp 
+                    text={'Crear Artículo'}
+                    disabled={false}
+                    onClick={next}
+                />
+                </Link>}
+            </div>
         )
-        }else{
-    return (
-        <div className='containerlogin'>
-             <img src={Icon} alt='icon' className='icon'/>
-            <h1 className='title'>
-                Log In
-            </h1>
-            <TextField
-            label="Email"
-            color="primary"
-            variant="filled"
-            onChange={(e) => {
-                setEmail(e.target.value);
-            }}
-            />
-            <TextField
-            label="Contraseña"
-            color="primary"
-            variant="filled"
-            type="password"
-            onChange={(e) => {
-                setPassword(e.target.value);
-            }}/>
-            <ButtonComp 
-                text={'Login'}
-                disabled={false}
-                onClick={login}
-             />
-             <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">{"Inicio de sesión"}</DialogTitle>
-                <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                    El usuario o la contraseña no coinciden o son incorrectos.
-                </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                <Button onClick={handleClose} color="primary" autoFocus>
-                    Aceptar
-                </Button>
-                </DialogActions>
-            </Dialog>
-        </div>
-    )
+    } else {
+        return (
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={classes.paper}>
+                    <Typography component="h1" variant="h5">
+                    Sign in
+                    </Typography>
+                    
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        label="Dirección de correo electrónico"
+                        name="email"
+                        autoComplete="email"
+                        autoFocus
+                        onChange={(e) => {
+                            setEmail(e.target.value);
+                        }}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Contraseña"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                        }}
+                    />
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        text={'Login'}
+                        onClick={login}
+                    >
+                        Iniciar Sesión
+                    </Button>
+                    
+                    <Dialog
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                    >
+                        <DialogTitle id="alert-dialog-title">{"Inicio de sesión"}</DialogTitle>
+                        <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            El usuario o la contraseña no coinciden o son incorrectos.
+                        </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                        <Button onClick={handleClose} color="primary" autoFocus>
+                            Aceptar
+                        </Button>
+                        </DialogActions>
+                    </Dialog>
+                </div>
+                </Container>
+        )
     }
 }
 
