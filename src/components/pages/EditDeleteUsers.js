@@ -16,7 +16,7 @@ function EditDeleteUsers() {
     const [lastNamesReg, setLastNamesReg] = useState(user.lastnames);
     const [passwordReg, setPasswordReg] = useState(user.password);
     const [roleReg, setRoleReg] = useState(user.roles);
-    
+    const isLogged = localStorage.getItem('role') !== "";
    
    
 
@@ -45,6 +45,8 @@ function EditDeleteUsers() {
    
 
     return (
+        <div>
+            {isLogged ?
         <div className='containerdeledit'>
              <img src={Icon} alt='icon' className='icon'/>
             <h1 className='title'>
@@ -115,6 +117,8 @@ function EditDeleteUsers() {
                 onClick={deleteUser}
              />
         </Link>
+        </div>
+        : <div> No Tiene Permisos</div> }
         </div>
     )
 }

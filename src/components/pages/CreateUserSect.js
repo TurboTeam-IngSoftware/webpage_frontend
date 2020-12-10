@@ -15,6 +15,8 @@ function CreateUserSect() {
     const [passwordReg, setPasswordReg] = useState("");
     const [roleReg, setRoleReg] = useState("");
 
+    const isLogged = localStorage.getItem('role') !== "";
+
     const createUser = () => {
         Axios.post('/webpage_backend/users', {
             email: emailReg,
@@ -28,6 +30,8 @@ function CreateUserSect() {
     };
 
     return (
+        <div>
+            {isLogged ?
         <div className='containercreateuser'>
              <img src={Icon} alt='icon' className='icon'/>
             <h1 className='title'>
@@ -87,7 +91,9 @@ function CreateUserSect() {
              />
         </Link>
         </div>
-    )
+        : <div> No Tiene Permisos</div> }
+        </div>
+    );
 }
 
 export default CreateUserSect

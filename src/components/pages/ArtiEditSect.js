@@ -13,6 +13,7 @@ function ArtiEditSect() {
     const [video, setVideo] = useState("");
     const [descripcorta, setDescripCorta] = useState("");
     const today = new Date();
+    const isLogged = localStorage.getItem('role') !== "";
     //const [imageSelected, setImageSelected] = useState("");
 
     const publish = () => {
@@ -25,7 +26,7 @@ function ArtiEditSect() {
             photo: "http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/storage/images/posts/serj.jpg",
             category: "economia",
             revised: "0",
-            video: video,
+            video: "https://www.youtube.com/embed/"+video.split("=")[1],
     }).then((response) => {
         console.log(response);
     });
@@ -47,6 +48,8 @@ function ArtiEditSect() {
 ///>
 
     return (
+        <div>
+        { isLogged ? 
         <div className='containerArtiEdit'>
         <h1 className='title'>
             Nuevo Artículo
@@ -104,6 +107,9 @@ function ArtiEditSect() {
              />
         </Link>
     </div>
-    )
+   : <div> No Tiene Permisos</div> }
+   </div>
+
+    );
 }
 export default ArtiEditSect

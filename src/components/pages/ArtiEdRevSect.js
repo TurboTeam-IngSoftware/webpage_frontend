@@ -62,7 +62,12 @@ function ArtiEdRevSect() {
     const handleChange = (event) => {
         setQuery(event.target.value);
       };
+
+    const isLogged = localStorage.getItem('role') !== "";
+
     return (
+        <div>
+            {isLogged ?
         <div style={{display: 'flex', justifyContent: 'center', flexDirection:'column', background:'bleachedalmond'}}>
               <TextField
             label="Buscar"
@@ -72,20 +77,7 @@ function ArtiEdRevSect() {
             onChange={(e) => {
                 setQuery(e.target.value);
             }}/>
-    
-    <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Categoría</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={query}
-          onChange={handleChange}
-        >
-          <MenuItem value={'name'}>Name</MenuItem>
-          <MenuItem value={'code'}>Code</MenuItem>
-          <MenuItem value={'population'}>Population</MenuItem>
-        </Select>
-      </FormControl>
+
 
             <GridList cellHeight={300} className={classes.gridList} cols={3}>
                 {posts.map(post =>   (
@@ -119,7 +111,9 @@ function ArtiEdRevSect() {
                 ))}
             </GridList>
         </div>
-    )
+        : <div> No Tiene Permisos</div> }
+        </div>
+    );
 }
 
 export default ArtiEdRevSect
