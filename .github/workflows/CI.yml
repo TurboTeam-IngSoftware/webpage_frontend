@@ -14,9 +14,11 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
-
+      
     - name: Deploy react app to github pages
       uses: tanwanimohit/deploy-react-to-ghpages@v1.0.1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
       env:
         CI: false
         
