@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-import Logo from "./BCBLogo.png"
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { IconContext } from 'react-icons/lib';
 
@@ -17,7 +16,7 @@ function Navbar() {
         <nav className='navbar'>
           <div className='navbar-container container'>
             <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-                <img src={Logo} alt='logo' className='navbar-icon'/>
+                <img src={process.env.PUBLIC_URL+'/BCBLogo.png'} alt='logo' className='navbar-icon'/>
               BCB
             </Link>
             <div className='menu-icon' onClick={handleClick}>

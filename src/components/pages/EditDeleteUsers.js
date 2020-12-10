@@ -3,7 +3,6 @@ import Axios from 'axios'
 import {TextField} from '@material-ui/core'
 import ButtonComp from '../ButtonComp'
 import './EditDeleteUser.css'
-import Icon from '../userimg.png'
 import { Link } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
 
@@ -48,7 +47,7 @@ function EditDeleteUsers() {
         <div>
             {isLogged ?
         <div className='containerdeledit'>
-             <img src={Icon} alt='icon' className='icon'/>
+             <img src={rocess.env.PUBLIC_URL+'/userimg.png'} alt='icon' className='icon'/>
             <h1 className='title'>
                 Editar Usuario
             </h1>

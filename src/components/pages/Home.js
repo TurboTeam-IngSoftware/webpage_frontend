@@ -1,11 +1,10 @@
 import React from 'react'
-import homeimg from '../homeimg.png'
 import './Home.css'
 
 function Home() {
     return (
         <div className='homemain'>
-            <img src={homeimg} alt='homeimg' className='homeimg'/>
+            <img src={process.env.PUBLIC_URL + '/homeimg.png'} alt='homeimg' className='homeimg'/>
         </div>
     )
 }

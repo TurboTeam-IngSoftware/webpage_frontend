@@ -3,7 +3,6 @@ import Axios from 'axios'
 import {TextField} from '@material-ui/core'
 import ButtonComp from '../ButtonComp'
 import './CreateUserSect.css'
-import Icon from '../userimg.png'
 import { Link } from 'react-router-dom';
 
 function CreateUserSect() {
@@ -33,7 +32,7 @@ function CreateUserSect() {
         <div>
             {isLogged ?
         <div className='containercreateuser'>
-             <img src={Icon} alt='icon' className='icon'/>
+             <img src={process.env.PUBLIC_URL+'/userimg.png'} alt='icon' className='icon'/>
             <h1 className='title'>
                 Crear Usuario
             </h1>
