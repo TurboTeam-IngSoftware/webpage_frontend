@@ -48,7 +48,7 @@ function ArtiEdRevSect() {
     const [posts, setPosts]= useState([]);
     const classes = useStyles();
     useEffect(()=> {
-        axios.get('/webpage_backend/posts')
+        axios.get('http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/posts')
         .then (res => {
             console.log(res)
             setPosts(res.data)
