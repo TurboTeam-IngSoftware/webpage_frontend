@@ -1,7 +1,8 @@
-import React, { useState} from 'react'
-import Axios from 'axios'
-import {TextField} from '@material-ui/core'
-import './LoginSect.css'
+import React, { useState} from 'react';
+import Axios from 'axios';
+import {TextField} from '@material-ui/core';
+import './LoginSect.css';
+import icon from '../../userimg.png';
 import ButtonComp from '../ButtonComp'
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
@@ -107,7 +108,7 @@ function LoginSect() {
     if (localStorage.getItem('name') !== ''){
         return(
             <div className='containerlogin'>
-            <img src={process.env.PUBLIC_URL+'/userimg.png'} alt='icon' className='icon'/>
+            <img src={icon} alt='icon' className='icon'/>
            <h1 className='title'>
                Log Out
            </h1> 
@@ -141,7 +142,7 @@ function LoginSect() {
                 onClick={next}
              />
              </Link>}
-                <img src={process.env.PUBLIC_URL+'/userimg.png'} alt='icon' className='icon'/>
+                <img src={icon} alt='icon' className='icon'/>
                 <h1 className='title'>Log Out</h1> 
                 <Link to ='/login' >
                 <ButtonComp 
