@@ -32,7 +32,6 @@ jobs:
           git config --global user.email "knhrvs@gmail.com"
           git remote add build https://github.com/TurboTeam-IngSoftware/webpage_build.git
           git add .
-          git commit --no-verify
-          git commit -m "Updated Webpage"
+          git commit -m "Updated Webpage" --no-verify
           git push build main --force
         
