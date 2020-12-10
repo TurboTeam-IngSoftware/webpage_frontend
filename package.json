@@ -16,6 +16,9 @@
     "react-icons": "^3.11.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "reactjs-input-validator": "^0.16.4",
+    "simple-react-validator": "^1.6.0",
+    "validator-js": "^0.2.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
