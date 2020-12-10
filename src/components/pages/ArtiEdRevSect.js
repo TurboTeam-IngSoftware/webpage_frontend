@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function ArtiListSect() {
+function ArtiEdRevSect() {
     const [posts, setPosts]= useState([]);
     const classes = useStyles();
     useEffect(()=> {
@@ -62,8 +62,12 @@ function ArtiListSect() {
     const handleChange = (event) => {
         setQuery(event.target.value);
       };
-      console.log(localStorage.getItem('name'))
+
+    const isLogged = localStorage.getItem('role') !== "";
+
     return (
+        <div>
+            {isLogged ?
         <div style={{display: 'flex', justifyContent: 'center', flexDirection:'column', background:'bleachedalmond'}}>
               <TextField
             label="Buscar"
@@ -73,23 +77,10 @@ function ArtiListSect() {
             onChange={(e) => {
                 setQuery(e.target.value);
             }}/>
-    
-    <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Categoría</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={query}
-          onChange={handleChange}
-        >
-          <MenuItem value={'name'}>Name</MenuItem>
-          <MenuItem value={'code'}>Code</MenuItem>
-          <MenuItem value={'population'}>Population</MenuItem>
-        </Select>
-      </FormControl>
+
 
             <GridList cellHeight={300} className={classes.gridList} cols={3}>
-                {posts.filter(post => post.revised === "1").map(post =>   (
+                {posts.map(post =>   (
 
                     
 
@@ -120,7 +111,9 @@ function ArtiListSect() {
                 ))}
             </GridList>
         </div>
-    )
+        : <div> No Tiene Permisos</div> }
+        </div>
+    );
 }
 
-export default ArtiListSect
+export default ArtiEdRevSect

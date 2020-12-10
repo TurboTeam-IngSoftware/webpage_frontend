@@ -35,7 +35,7 @@ function Navbar() {
                   className='nav-links'
                   onClick={closeMobileMenu}
                 >
-                  Login
+                  Administradores
                 </Link>
               </li>
               <li className='nav-item'>
