@@ -30,8 +30,8 @@ jobs:
       run: |
           git config --global user.name "0WLB34R"
           git config --global user.email "knhrvs@gmail.com"
-          git remote add build https://github.com/TurboTeam-IngSoftware/webpage_build.git
+          git remote add release https://github.com/TurboTeam-IngSoftware/release.git
           git add .
-          git commit -m "Updated Webpage" --no-verify
-          git push build main --force
+          git commit -m "Updated Webpage"
+          git push release main
         
