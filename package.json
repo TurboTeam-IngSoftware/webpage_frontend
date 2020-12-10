@@ -2,7 +2,7 @@
   "name": "blog",
   "version": "0.1.0",
   "proxy": "http://skynet.lp.upb.edu/~pbruckner18",
-  "homepage": "https://TurboTeam-IngSoftware.github.io/webpage_frontend",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.1",
