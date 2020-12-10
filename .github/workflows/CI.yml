@@ -30,9 +30,9 @@ jobs:
       run: |
           git config --global user.name "0WLB34R"
           git config --global user.email "knhrvs@gmail.com"
-          git remote add origin https://github.com/TurboTeam-IngSoftware/webpage_build.git
+          git remote add build https://github.com/TurboTeam-IngSoftware/webpage_build.git
           git pull
           git add -A
           git commit -m "Updated Webpage"
-          git push origin main
+          git push build main
         
