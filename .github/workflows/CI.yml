@@ -37,6 +37,7 @@ jobs:
         user_email: 'github-actions[bot]@users.noreply.github.com'
         github_token: 2c4b4829fcbbcc18f2c113256baecb0c501f39d1
         repository: ${{ github.repository }}
+        CI: false
         
 
         
