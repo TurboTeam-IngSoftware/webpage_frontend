@@ -1,8 +1,7 @@
 {
   "name": "blog",
   "version": "0.1.0",
-  "proxy": "http://skynet.lp.upb.edu/~pbruckner18",
-  "homepage": ".",
+  "homepage": "http://skynet.lp.upb.edu/~pbruckner18/ReactCode/",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.1",

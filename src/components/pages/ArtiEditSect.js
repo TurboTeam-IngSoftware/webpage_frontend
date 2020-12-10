@@ -17,7 +17,7 @@ function ArtiEditSect() {
     //const [imageSelected, setImageSelected] = useState("");
 
     const publish = () => {
-        Axios.post("/webpage_backend/posts", {
+        Axios.post("http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/posts", {
             title: title,
             shortDescription: descripcorta,
             description: content,

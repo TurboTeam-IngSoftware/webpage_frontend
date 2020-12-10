@@ -49,7 +49,7 @@ function LoginSect() {
 
     const login = () => {
         if (validateEmail(email) && validatePassword(password)) {
-            Axios.post('/webpage_backend/login', {
+            Axios.post('http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/login', {
                 "email": email,
                 "password": password,
             }).then((response) => {
