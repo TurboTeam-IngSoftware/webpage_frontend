@@ -17,6 +17,7 @@ jobs:
         run: |
           npm install
           npm run build --if-present
+          ls
         env:
           CI: false
       - name: Archive production artifacts
