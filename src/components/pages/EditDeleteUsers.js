@@ -52,7 +52,7 @@ function EditDeleteUsers() {
                 Editar Usuario
             </h1>
 
-            <TextField
+        <TextField
             type='text'
             label="Email"
             defaultValue={user.email}
@@ -62,7 +62,7 @@ function EditDeleteUsers() {
                 setEmailReg(e.target.value);
             }}
             />
-             <TextField
+        <TextField
             type='text'
             label="Nombre"
             defaultValue={user.names}
@@ -72,7 +72,7 @@ function EditDeleteUsers() {
                 setNamesReg(e.target.value);
             }}
             />
-             <TextField
+        <TextField
             type='text'
             label="Apellido"
             defaultValue={user.lastnames}
@@ -82,7 +82,7 @@ function EditDeleteUsers() {
                 setLastNamesReg(e.target.value);
             }}
             />
-             <TextField
+        <TextField
             type='text'
             label="Contraseña"
             defaultValue={user.password}
@@ -92,7 +92,7 @@ function EditDeleteUsers() {
                 setPasswordReg(e.target.value);
             }}
             />
-             <TextField
+        <TextField
             type='text'
             label="Rol"
             defaultValue={user.roles}
