@@ -30,15 +30,6 @@ function Navbar() {
               </li>
               <li className='nav-item'>
                 <Link
-                  to='/login'
-                  className='nav-links'
-                  onClick={closeMobileMenu}
-                >
-                  Administradores
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link
                   to='/articulos'
                   className='nav-links'
                   onClick={closeMobileMenu}
@@ -46,6 +37,26 @@ function Navbar() {
                   Artículos
                 </Link>
               </li>
+              {localStorage.getItem('name').length !== 0 ? 
+                <li className='nav-item'>
+                  <Link
+                    to='/login'
+                    className='nav-links'
+                    onClick={closeMobileMenu}
+                  >
+                  {localStorage.getItem('name') + " " + localStorage.getItem('lastnm')}<br></br>
+                  </Link>
+                </li> :
+                <li className='nav-item'>
+                <Link
+                  to='/login'
+                  className='nav-links'
+                  onClick={closeMobileMenu}
+                >
+                  Iniciar sesión
+                </Link>
+              </li> 
+              }
             </ul>
           </div>
         </nav>

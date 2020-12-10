@@ -38,6 +38,19 @@ function LoginSect() {
       setOpen(false);
     };
 
+    function roleIdentificator() {
+        const role = localStorage.getItem('role');
+        if (role === "1") {
+          return "Administrador";
+        } else if (role === "2") {
+          return "Editor";
+        } else if (role === "3") {
+          return "Revisor";
+        } else {
+          return "";
+        }
+      }
+
     const validateEmail = expression.test(String(email).toLowerCase());
     const validatePassword = password.length >= 8;
 
@@ -98,10 +111,12 @@ function LoginSect() {
     if (localStorage.getItem('name') !== ''){
         return(
             <div className='containerlogin'>
-            <img src={process.env.PUBLIC_URL+'/userimg.png'} alt='icon' className='icon'/>
            <h1 className='title'>
-               Log Out
-           </h1> 
+               {localStorage.getItem("name") + " " + localStorage.getItem("lastnm")}
+           </h1>
+           <p>
+                {roleIdentificator()}
+           </p>
            <Link to ='/login' >
            <ButtonComp 
                 text={'Logout'}
@@ -132,38 +147,7 @@ function LoginSect() {
                 onClick={next}
              />
              </Link>}
-                <img src={process.env.PUBLIC_URL+'/userimg.png'} alt='icon' className='icon'/>
-                <h1 className='title'>Log Out</h1> 
-                <Link to ='/login' >
-                <ButtonComp 
-                    text={'Logout'}
-                    disabled={false}
-                    onClick={logout}
-                />
-                </Link>
-                <Link to ='/artireded' >
-                <ButtonComp 
-                    text={'Todos los Artículos'}
-                    disabled={false}
-                    onClick={next}
-                />
-                </Link>
-                {isAdmin &&
-                <Link to ='/listausuarios' >
-                <ButtonComp 
-                    text={'Ver Usuarios'}
-                    disabled={false}
-                    onClick={next}
-                />
-                </Link>}
-                {isEditor &&
-                <Link to ='/creararti' >
-                <ButtonComp 
-                    text={'Crear Artículo'}
-                    disabled={false}
-                    onClick={next}
-                />
-                </Link>}
+                
             </div>
         )
     } else {
