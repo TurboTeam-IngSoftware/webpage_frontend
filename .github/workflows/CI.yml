@@ -8,25 +8,22 @@ on:
     branches: [ main ]
 
 jobs:
-  deploy:
-    name: Deploying to Github Pages
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout branch
+  - name: Checkout repository
         uses: actions/checkout@v2
-
-      - name: Authorizing Github action
-        with:
-          token: "${{ secrets.GITHUB_TOKEN }}"
-        uses: oleksiyrudenko/gha-git-credentials@v1
-
-      - name: Doploy to GitHub Pages
-        uses: amitsingh-007/deploy-to-github-pages@v1.1
+      - name: npm install, and build
+        run: |
+          npm install
+          npm run build --if-present
         env:
           CI: false
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist-without-markdown
+          path: |
+            dist
+            !dist/**/*.md
+
         
 
         
