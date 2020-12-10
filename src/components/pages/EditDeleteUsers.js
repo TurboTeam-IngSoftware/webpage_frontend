@@ -47,7 +47,7 @@ function EditDeleteUsers() {
         <div>
             {isLogged ?
         <div className='containerdeledit'>
-             <img src={rocess.env.PUBLIC_URL+'/userimg.png'} alt='icon' className='icon'/>
+             <img src={process.env.PUBLIC_URL+'/userimg.png'} alt='icon' className='icon'/>
             <h1 className='title'>
                 Editar Usuario
             </h1>
