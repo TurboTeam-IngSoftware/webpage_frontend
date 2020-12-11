@@ -156,7 +156,7 @@ function LoginSect() {
                 <CssBaseline />
                 <div className={classes.paper}>
                     <Typography component="h1" variant="h5">
-                    Sign in
+                    Log in
                     </Typography>
                     
                     <TextField

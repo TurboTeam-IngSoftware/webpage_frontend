@@ -33,7 +33,7 @@ function EditDeleteUsers() {
     };
 
     const deleteUser = () => {
-        Axios.delete('/webpage_backend/users', {
+        Axios.delete('http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/users', {
             data:{
             idUser: user.idUser
             }
