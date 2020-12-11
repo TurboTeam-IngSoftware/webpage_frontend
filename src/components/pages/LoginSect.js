@@ -18,6 +18,7 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 function LoginSect() {
+    const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
     const next = (e) => {
         console.log('Me voy a la lista de usuarios')
     }
@@ -38,42 +39,45 @@ function LoginSect() {
       setOpen(false);
     };
 
-    const validateEmail = (email) => {
-        const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
-        return expression.test(String(email).toLowerCase());
-    }
+    function roleIdentificator() {
+        const role = localStorage.getItem('role');
+        if (role === "1") {
+          return "Administrador";
+        } else if (role === "2") {
+          return "Editor";
+        } else if (role === "3") {
+          return "Revisor";
+        } else {
+          return "";
+        }
+      }
 
-    const validatePassword = (password) => {
-        return password.length >= 8;
-    }
+    const validateEmail = expression.test(String(email).toLowerCase());
+    const validatePassword = password.length >= 8;
 
     const login = () => {
-        if (validateEmail(email) && validatePassword(password)) {
-            Axios.post('http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/login', {
+        Axios.post('/webpage_backend/login', {
                 "email": email,
                 "password": password,
-            }).then((response) => {
-                console.log(response.data);
-                if(response.data.status==='error'){
-                    console.log("No se pudo iniciar sesión");
-                    handleClickOpen();
-                }else{
-                    console.log("Se pudo iniciar sesión");
-                    localStorage.setItem('token', response.token)
-                    localStorage.setItem('role', response.data[0].roles)
-                    localStorage.setItem('name', response.data[0].names)
-                    localStorage.setItem('lastnm', response.data[0].lastnames)
-                    console.log(localStorage.getItem('role'))
-                    console.log(localStorage.getItem('name'))
-                    console.log(localStorage.getItem('lastnm'))
-                    history.push('/')
-                }
-            });
-        } else {
-            //TODO Show warning
-        }
-        
-    };
+        }).then((response) => {
+            console.log(response.data);
+            if(response.data.status==='error'){
+                console.log("No se pudo iniciar sesión");
+                handleClickOpen();
+            }else{
+                console.log("Se pudo iniciar sesión");
+                localStorage.setItem('token', response.token)
+                localStorage.setItem('role', response.data[0].roles)
+                localStorage.setItem('name', response.data[0].names)
+                localStorage.setItem('lastnm', response.data[0].lastnames)
+                console.log(localStorage.getItem('role'))
+                console.log(localStorage.getItem('name'))
+                console.log(localStorage.getItem('lastnm'))
+                history.push('/')
+            }
+        });
+    }
+
     const useStyles = makeStyles((theme) => ({
         paper: {
             marginTop: theme.spacing(8),
@@ -108,10 +112,12 @@ function LoginSect() {
     if (localStorage.getItem('name') !== ''){
         return(
             <div className='containerlogin'>
-            <img src={icon} alt='icon' className='icon'/>
            <h1 className='title'>
-               Log Out
-           </h1> 
+               {localStorage.getItem("name") + " " + localStorage.getItem("lastnm")}
+           </h1>
+           <p>
+                {roleIdentificator()}
+           </p>
            <Link to ='/login' >
            <ButtonComp 
                 text={'Logout'}
@@ -142,38 +148,6 @@ function LoginSect() {
                 onClick={next}
              />
              </Link>}
-                <img src={icon} alt='icon' className='icon'/>
-                <h1 className='title'>Log Out</h1> 
-                <Link to ='/login' >
-                <ButtonComp 
-                    text={'Logout'}
-                    disabled={false}
-                    onClick={logout}
-                />
-                </Link>
-                <Link to ='/artireded' >
-                <ButtonComp 
-                    text={'Todos los Artículos'}
-                    disabled={false}
-                    onClick={next}
-                />
-                </Link>
-                {isAdmin &&
-                <Link to ='/listausuarios' >
-                <ButtonComp 
-                    text={'Ver Usuarios'}
-                    disabled={false}
-                    onClick={next}
-                />
-                </Link>}
-                {isEditor &&
-                <Link to ='/creararti' >
-                <ButtonComp 
-                    text={'Crear Artículo'}
-                    disabled={false}
-                    onClick={next}
-                />
-                </Link>}
             </div>
         )
     } else {
@@ -198,6 +172,8 @@ function LoginSect() {
                         onChange={(e) => {
                             setEmail(e.target.value);
                         }}
+                        helperText={validateEmail ? "Correo electrónico válido" : "Correo electrónico inválido"}
+                        error={!validateEmail}
                     />
                     <TextField
                         variant="outlined"
@@ -212,6 +188,8 @@ function LoginSect() {
                         onChange={(e) => {
                             setPassword(e.target.value);
                         }}
+                        helperText={validatePassword ? "Contraseña válida." : "Ingresa un formato válido de contraseña."}
+                        error={!validatePassword}
                     />
                     <Button
                         type="submit"
@@ -221,6 +199,7 @@ function LoginSect() {
                         className={classes.submit}
                         text={'Login'}
                         onClick={login}
+                        disabled={!(validateEmail && validatePassword)}
                     >
                         Iniciar Sesión
                     </Button>
