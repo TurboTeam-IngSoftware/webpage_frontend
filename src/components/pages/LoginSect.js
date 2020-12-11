@@ -2,7 +2,6 @@ import React, { useState} from 'react';
 import Axios from 'axios';
 import {TextField} from '@material-ui/core';
 import './LoginSect.css';
-import icon from '../../userimg.png';
 import ButtonComp from '../ButtonComp'
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
@@ -56,7 +55,7 @@ function LoginSect() {
     const validatePassword = password.length >= 8;
 
     const login = () => {
-        Axios.post('/webpage_backend/login', {
+        Axios.post('http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/login', {
                 "email": email,
                 "password": password,
         }).then((response) => {
@@ -156,7 +155,7 @@ function LoginSect() {
                 <CssBaseline />
                 <div className={classes.paper}>
                     <Typography component="h1" variant="h5">
-                    Log in
+                    Log in.
                     </Typography>
                     
                     <TextField
