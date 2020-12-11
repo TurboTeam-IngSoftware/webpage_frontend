@@ -29,7 +29,7 @@ function ArtiSect() {
     const isPending =( revised === "0" && (isEditor || isRevisor));
 
     const approve = () =>{
-        Axios.put("/webpage_backend/posts", {
+        Axios.put("http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/posts", {
             idPost: idPost,
             title: title,
             shortDescription: shortDescription,

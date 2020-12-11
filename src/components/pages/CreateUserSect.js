@@ -17,7 +17,7 @@ function CreateUserSect() {
     const isLogged = localStorage.getItem('role') !== "";
 
     const createUser = () => {
-        Axios.post('/webpage_backend/users', {
+        Axios.post('http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/users', {
             email: emailReg,
             names: namesReg,
             lastnames: lastNamesReg,
