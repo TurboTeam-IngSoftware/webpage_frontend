@@ -80,6 +80,7 @@ function CreateUserSect() {
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
+            {localStorage.getItem("role") === "1" ?
                 <div className={classes.paper}>
                     <Typography component="h1" variant="h5">
                     Crear nuevo usuario
@@ -221,7 +222,7 @@ function CreateUserSect() {
                         </Button>
                         </DialogActions>
                     </Dialog>
-            </div>
+                </div> : <div><p>No tiene permisos para realizar esta función</p></div>}
         </Container>
     );
 }

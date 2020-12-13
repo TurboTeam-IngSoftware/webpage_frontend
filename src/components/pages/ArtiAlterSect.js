@@ -16,10 +16,8 @@ function ArtiAlterSect() {
     const [video, setVideo] = useState(post.video);
     const [descripcorta, setDescripCorta] = useState(post.shortDescription);
     const today = new Date();
-   
 
     const publish = () => {
-        
 
         Axios.put("http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/posts", {
             idPost: post.idPost,
@@ -36,13 +34,11 @@ function ArtiAlterSect() {
         console.log(response);
     });
     };
-
     const isLogged = localStorage.getItem('role') !== "";
-    
 
     return (
         <div>
-        {isLogged ? 
+        {localStorage.getItem("role") === "1" || localStorage.getItem("role") === "2" ? 
         <div className='containerArtiEdit'>
         <h1 className='title'>
             Editando Artículo

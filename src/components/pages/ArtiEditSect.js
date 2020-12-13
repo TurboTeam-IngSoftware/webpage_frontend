@@ -13,8 +13,6 @@ function ArtiEditSect() {
     const [video, setVideo] = useState("");
     const [descripcorta, setDescripCorta] = useState("");
     const today = new Date();
-    const isLogged = localStorage.getItem('role') !== "";
-    //const [imageSelected, setImageSelected] = useState("");
 
     const publish = () => {
         Axios.post("http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/posts", {
@@ -49,7 +47,7 @@ function ArtiEditSect() {
 
     return (
         <div>
-        { isLogged ? 
+        { localStorage.getItem("role") === "1" || localStorage.getItem("role") === "2" ? 
         <div className='containerArtiEdit'>
         <h1 className='title'>
             Nuevo Artículo
