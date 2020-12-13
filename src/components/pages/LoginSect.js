@@ -1,7 +1,8 @@
-import React, { useState} from 'react'
-import Axios from 'axios'
-import {TextField} from '@material-ui/core'
-import './LoginSect.css'
+import React, { useState} from 'react';
+import Axios from 'axios';
+import {TextField} from '@material-ui/core';
+import './LoginSect.css';
+import icon from '../../userimg.png';
 import ButtonComp from '../ButtonComp'
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
@@ -147,7 +148,6 @@ function LoginSect() {
                 onClick={next}
              />
              </Link>}
-                
             </div>
         )
     } else {

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { IconContext } from 'react-icons/lib';
+import bcblogo from '../BCBLogo.png'
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -16,7 +17,7 @@ function Navbar() {
         <nav className='navbar'>
           <div className='navbar-container container'>
             <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-                <img src={process.env.PUBLIC_URL+'/BCBLogo.png'} alt='logo' className='navbar-icon'/>
+                <img src={bcblogo} alt='logo' className='navbar-icon'/>
               BCB
             </Link>
             <div className='menu-icon' onClick={handleClick}>
