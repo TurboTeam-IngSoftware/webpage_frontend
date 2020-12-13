@@ -18,7 +18,8 @@ function ArtiAlterSect() {
     const today = new Date();
 
     const publish = () => {
-        Axios.put("/webpage_backend/posts", {
+
+        Axios.put("http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/posts", {
             idPost: post.idPost,
             title: title,
             shortDescription: descripcorta,

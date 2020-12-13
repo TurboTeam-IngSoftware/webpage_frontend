@@ -36,7 +36,7 @@ export default function AdminList() {
 
   const [users, setUsers]= useState([]);
     useEffect(()=> {
-        axios.get('/webpage_backend/users')
+        axios.get('http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/users')
         .then (res => {
             console.log(res)
             setUsers(res.data)
