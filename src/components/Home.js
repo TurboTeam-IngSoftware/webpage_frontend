@@ -6,7 +6,7 @@ function Home() {
     return (
         
         <div className='homemain'>
-            <h1> this is a test</h1>
+            <h1> this is a test </h1>
             <img src={homeimg} alt='homeimg' className='homeimg'/>
         </div>
     )
