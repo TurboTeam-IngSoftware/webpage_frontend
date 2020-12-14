@@ -114,13 +114,17 @@ function ArtiListSect() {
         </main>
         {/* Footer */}
         <footer className={classes.footer}>
-          <Typography variant="h6" align="center" gutterBottom>
-            Footer
-          </Typography>
-          <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-            Something here to give the footer a purpose!
-          </Typography>
-        </footer>
+                <Typography variant="h6" align="center" gutterBottom>
+                    Banco Central de Bolivia
+                </Typography>
+                <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
+                <p>Derechos Reservados ® Banco Central de Bolivia 2011- 2020</p>
+                <p>Teléfono:(591-2) 240 9090 - Fax:(591-2) 266 1590 Línea gratuita: 800 10 2023 - Casilla de Correo: 3118</p>
+                <p>Correo electrónico: bancocentraldebolivia@bcb.gob.bo</p>
+                <p>Calle Ayacucho y Mercado</p>
+                <p>La Paz - Bolivia</p>
+                </Typography>
+            </footer>
         {/* End footer */}
       </React.Fragment>
         )

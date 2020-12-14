@@ -4,7 +4,8 @@ import { useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import Axios from 'axios'
+import Axios from 'axios';
+import Typography from '@material-ui/core/Typography';
 
 function ArtiSect() {
     const isEditor = (localStorage.getItem('role') === "2");
@@ -82,11 +83,12 @@ function ArtiSect() {
                 {isApproved && <h1 className='status'>Artículo Aprobado</h1>} 
                 {isRejected && <strong className='status'>Artículo Rechazado</strong>} 
                 {isPending && <strong className='status'>Artículo Sin Revisar</strong>} 
-                <strong className='author'>{author}</strong>
-                <strong className='date'> {date}</strong>
-                <strong className='date'> {shortDescription}</strong>
-                <strong className='date'> {category}</strong>
-                <iframe title='A video' width="560" height="315" src={video} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <strong className='artshort'>"{shortDescription}"</strong>
+                <strong className='author'>Por: {author} | {date}</strong>
+                <strong className='category'>Categoría: {category}</strong>
+                <strong className='media'>
+                <iframe title='A video' width="1024" height="512" src={video} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </strong>
                 <div className='body'> {description}</div>
         
 
@@ -108,6 +110,18 @@ function ArtiSect() {
              </Button>
             }
             </div>
+            <footer>
+                <Typography variant="h6" align="center" gutterBottom>
+                    Banco Central de Bolivia
+                </Typography>
+                <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
+                <p>Derechos Reservados ® Banco Central de Bolivia 2011- 2020</p>
+                <p>Teléfono:(591-2) 240 9090 - Fax:(591-2) 266 1590 Línea gratuita: 800 10 2023 - Casilla de Correo: 3118</p>
+                <p>Correo electrónico: bancocentraldebolivia@bcb.gob.bo</p>
+                <p>Calle Ayacucho y Mercado</p>
+                <p>La Paz - Bolivia</p>
+                </Typography>
+            </footer>
         </>
     )
 }

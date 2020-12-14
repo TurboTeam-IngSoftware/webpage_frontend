@@ -1,39 +1,62 @@
 .artmaincont{
-    background-color: blanchedalmond;
+    background-color: rgb(255, 255, 255);
     display: flex;
-    align-items: center;
+    align-items: left;
     flex-direction: column;
-    width: 100%;
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .arttitle{
     font-size: 70px ;
     color: #242424;
-    margin: 10px;
+    margin: 50px;
+    font-family: Tahoma, sans-serif;
+    font-style: bold;
+}
+
+.artshort{
+    font-size: 30px ;
+    color: #242424;
+    margin-left: 50px;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-style: italic;
 }
 
 .status{
     font-size: 50px;
     color: crimson;
-    margin :10px;
+    margin-left: 30px;
+}
+
+.category{
+    font-size: 18px;
+    color: #6d6d6d;
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
 }
 
 .author{
     font-size: 20px ;
     color: #242424;
-    margin: 5px;
+    margin-top: 50px;
+    margin-left: 50px;
+    font-family: 'Trebuchet MS', sans-serif;
 }
 
-.date{
-    font-size: 20px ;
-    color: #242424;
-    margin: 5px;
+.media{
+    margin: auto;
 }
 
 .body{
-    margin: 15px;
-    padding: 10px;
-    background-color: ghostwhite;
-    font-size: 12px;
-    width: 50%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 50px;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
 }
