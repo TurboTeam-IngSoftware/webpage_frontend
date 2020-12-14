@@ -17,6 +17,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -58,7 +59,7 @@ function EditDeleteUsers() {
     const validateRole = role !== '0';
 
     const editUser = () => {
-        Axios.put('/webpage_backend/users', {
+        Axios.put('http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/users', {
             idUser: user.idUser,
             email: email,
             names: names,
@@ -70,6 +71,7 @@ function EditDeleteUsers() {
     });
     };
 
+    
     const deleteUser = () => {
         Axios.delete('http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/users', {
             data:{
@@ -200,6 +202,7 @@ function EditDeleteUsers() {
                         <MenuItem value={3}>Revisor</MenuItem>
                         </Select>
                     </FormControl>
+                    <Link to ='/listausuarios' >
                     <Button
                         type="submit"
                         fullWidth
@@ -212,6 +215,21 @@ function EditDeleteUsers() {
                     >
                         Actulizar usuario
                     </Button>
+                    </Link>
+                    <Link to ='/listausuarios' >
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        text={'Crear usuario'}
+                        onClick={deleteUser}
+                        disabled={false}
+                    >
+                        Eliminar Usuario
+                    </Button>
+                    </Link>
                     <Dialog
                         open={open}
                         onClose={handleClose}

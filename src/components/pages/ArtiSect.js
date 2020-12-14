@@ -46,7 +46,7 @@ function ArtiSect() {
     };
 
     const reject = () =>{
-        Axios.put("/webpage_backend/posts", {
+        Axios.put("http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/posts", {
             idPost: idPost,
             title: title,
             shortDescription: shortDescription,
@@ -63,7 +63,7 @@ function ArtiSect() {
     };
 
     const deleteart= () =>{
-        Axios.delete('/webpage_backend/posts', {
+        Axios.delete('http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/posts', {
             data:{
             idPost: idPost,
             }
