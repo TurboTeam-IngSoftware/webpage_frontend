@@ -41,7 +41,7 @@ function ArtiEditSect() {
         Axios.post("http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/photos", fd)
         .then(res => {
             console.log(res);
-        })ñ
+        })
     }
 
     return (
