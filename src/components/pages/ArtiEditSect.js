@@ -12,6 +12,7 @@ function ArtiEditSect() {
     const [content, setContent] = useState("");
     const [video, setVideo] = useState("");
     const [descripcorta, setDescripCorta] = useState("");
+    const [imagen, setImagen] = useState("");
     const today = new Date();
 
     const publish = () => {
@@ -30,20 +31,18 @@ function ArtiEditSect() {
     });
     };
     
+    const uploadImage = () => {
+        const fd = new FormData();
+        fd.append('image', this.state.imagen)
+        Axios.post("http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/posts", fd)
+        .then(res => {
+            console.log(res);
+        });
 
-   // const uploadImage = () => {
-     //   Axios.post('/webpage_backend/photosUp', {
-       //     "imageSelected": imageSelected,
-    //}).then((response) => {
-      //  console.log(response.data);
-    //    }
-    //)}
+    
+    }
 
-     //   <ButtonComp 
-     //text={'Subir imagen'}
-     //disabled={false}
-     //onClick={uploadImage}
-///>
+  
 
     return (
         <div>
@@ -96,7 +95,25 @@ function ArtiEditSect() {
                 setVideo(e.target.value);
             }}
             />
-           
+         //Subir imagenes   
+        <input 
+        style={{display: 'none'}}
+        type="file"
+        onChange={(e) => {
+            setImagen(e.target.value);
+        }} 
+        ref={fileInput => this.fileInput = fileInput}
+        />
+         <ButtonComp 
+            text={'Seleccionar imagen'}
+            disabled={false}
+            onClick={() => this.fileInput.click()}
+            />
+        <ButtonComp 
+            text={'Subir imagen'}
+            disabled={false}
+            onClick={uploadImage}
+            />
         <Link to ='/artireded' >
             <ButtonComp 
                 text={'Publicar'}
@@ -107,7 +124,7 @@ function ArtiEditSect() {
     </div>
    : <div> No Tiene Permisos</div> }
    </div>
-
+    
     );
 }
 export default ArtiEditSect
