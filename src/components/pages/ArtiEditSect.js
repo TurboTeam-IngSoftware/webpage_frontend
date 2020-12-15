@@ -95,6 +95,7 @@ function ArtiEditSect() {
                 setVideo(e.target.value);
             }}
             />
+         //Subir imagenes   
         <input 
         style={{display: 'none'}}
         type="file"
@@ -123,7 +124,7 @@ function ArtiEditSect() {
     </div>
    : <div> No Tiene Permisos</div> }
    </div>
-
+    
     );
 }
 export default ArtiEditSect
