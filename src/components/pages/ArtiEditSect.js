@@ -38,10 +38,10 @@ function ArtiEditSect() {
     const uploadImage = () => {
         const fd = new FormData();
         fd.append('image', imagen);
-        Axios.post("http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/photos", fd)
+        Axios.post("webpage_backend/class/photos", fd)
         .then(res => {
             console.log(res);
-        })ñ
+        })
     }
 
     return (
