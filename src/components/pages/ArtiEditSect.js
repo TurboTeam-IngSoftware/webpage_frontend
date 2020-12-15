@@ -95,20 +95,14 @@ function ArtiEditSect() {
                 setVideo(e.target.value);
             }}
             />
-         //Subir imagenes   
+         
         <input 
         style={{display: 'none'}}
         type="file"
         onChange={(e) => {
             setImagen(e.target.value);
         }} 
-        ref={fileInput => this.fileInput = fileInput}
         />
-         <ButtonComp 
-            text={'Seleccionar imagen'}
-            disabled={false}
-            onClick={() => this.fileInput.click()}
-            />
         <ButtonComp 
             text={'Subir imagen'}
             disabled={false}
