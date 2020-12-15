@@ -19,6 +19,16 @@ function ArtiEditSect() {
     const validateShortDescription = descripcorta.length >= 30 && descripcorta.length <= 100;
     const validateContent = content.length >= 500 && content.length <= 3000;
 
+    function makeid(length) {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+           result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
     const publish = () => {
         Axios.post("webpage_backend/posts", {
             title: title,
@@ -26,7 +36,7 @@ function ArtiEditSect() {
             description: content,
             author: localStorage.getItem('name')+" "+localStorage.getItem('lastnm'),
             date: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
-            photo: "http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/storage/images/posts/serj.jpg",
+            photo: "http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/storage/images/posts/" + makeid(10) + ".jpg",
             category: "economia",
             revised: "0",
             video: "https://www.youtube.com/embed/"+video.split("=")[1],
