@@ -17,6 +17,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -32,14 +33,14 @@ function EditDeleteUsers() {
     const location = useLocation();
     const classes = useStyles();
     const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
-    
+    const history = useHistory();
     const user = location.data;
-    const [email, setEmail] = useState("");
-    const [names, setNames] = useState("");
-    const [lastNames, setLastNames] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState(user.email);
+    const [names, setNames] = useState(user.names);
+    const [lastNames, setLastNames] = useState(user.lastnames);
+    const [password, setPassword] = useState(user.password);
     const [reTypedPassword, setReTypedPassword] = useState("");
-    const [role, setRole] = useState("");
+    const [role, setRole] = useState(user.role);
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -58,7 +59,7 @@ function EditDeleteUsers() {
     const validateRole = role !== '0';
 
     const editUser = () => {
-        Axios.put('/webpage_backend/users', {
+        Axios.put('webpage_backend/users', {
             idUser: user.idUser,
             email: email,
             names: names,
@@ -67,16 +68,19 @@ function EditDeleteUsers() {
             roles: role,
     }).then((response) => {
         console.log(response);
+        history.push('/listausuarios');
     });
     };
 
+    
     const deleteUser = () => {
-        Axios.delete('http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/users', {
+        Axios.delete('webpage_backend/users', {
             data:{
-            idUser: user.idUser
+                idUser: user.idUser
             }
         }).then((response) => {
         console.log(response);
+        history.push('/listausuarios');
     });
     };
    
@@ -122,7 +126,7 @@ function EditDeleteUsers() {
                         autoComplete="names"
                         autoFocus
                         helperText={validateNames ? "Nombre válido" : "Nombre inválido"}
-                        error={!validateEmail}
+                        error={!validateNames}
                         onChange={(e) => {
                             setNames(e.target.value);
                         }}
@@ -212,6 +216,18 @@ function EditDeleteUsers() {
                     >
                         Actulizar usuario
                     </Button>
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        text={'Crear usuario'}
+                        onClick={handleClickOpen}
+                        disabled={false}
+                    >
+                        Eliminar Usuario
+                    </Button>
                     <Dialog
                         open={open}
                         onClose={handleClose}
@@ -221,12 +237,15 @@ function EditDeleteUsers() {
                         <DialogTitle id="alert-dialog-title">{"Error al crear usuario"}</DialogTitle>
                         <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            Puede que hayan problemas con el servidor en este momento. Vuelve a intentarlo más tarde.
+                            ¿Está seguro que quiere eliminar el usuario?
                         </DialogContentText>
                         </DialogContent>
                         <DialogActions>
+                        <Button onClick={deleteUser} color="primary" autoFocus>
+                            AceptarhandleClose
+                        </Button>
                         <Button onClick={handleClose} color="primary" autoFocus>
-                            Aceptar
+                            Cancelar
                         </Button>
                         </DialogActions>
                     </Dialog>

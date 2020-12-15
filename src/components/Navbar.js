@@ -11,6 +11,8 @@ function Navbar() {
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
+  const fullName = localStorage.getItem('name') + " " + localStorage.getItem('lastnm');
+
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
@@ -18,7 +20,7 @@ function Navbar() {
           <div className='navbar-container container'>
             <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
                 <img src={bcblogo} alt='logo' className='navbar-icon'/>
-              BCB
+              BCB TEst
             </Link>
             <div className='menu-icon' onClick={handleClick}>
               {click ? <FaTimes /> : <FaBars />}
@@ -26,7 +28,7 @@ function Navbar() {
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
               <li className='nav-item'>
                 <Link to='/' className='nav-links' onClick={closeMobileMenu}>
-                  Home Test
+                  Home
                 </Link>
               </li>
               <li className='nav-item'>
@@ -38,14 +40,14 @@ function Navbar() {
                   Artículos
                 </Link>
               </li>
-              {localStorage.getItem('name').length !== 0 ? 
+              {fullName !== " " ? 
                 <li className='nav-item'>
                   <Link
                     to='/login'
                     className='nav-links'
                     onClick={closeMobileMenu}
                   >
-                  {localStorage.getItem('name') + " " + localStorage.getItem('lastnm')}<br></br>
+                  {fullName}<br></br>
                   </Link>
                 </li> :
                 <li className='nav-item'>

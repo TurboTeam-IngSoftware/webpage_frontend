@@ -60,7 +60,7 @@ function CreateUserSect() {
     const validateRole = role !== '0';
 
     const createUser = () => {
-        Axios.post('http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/users', {
+        Axios.post('webpage_backend/users', {
             email: email,
             names: names,
             lastnames: lastNames,

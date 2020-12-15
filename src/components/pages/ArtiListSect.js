@@ -7,11 +7,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { useHistory } from 'react-router-dom';
-import AppBar from '@material-ui/core/AppBar';
 import Card from '@material-ui/core/Card';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
 import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
@@ -47,10 +45,11 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function ArtiListSect() {
+    var role = localStorage.getItem("role");
     const [posts, setPosts]= useState([]);
     const classes = useStyles();
     useEffect(()=> {
-        axios.get('http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/posts')
+        axios.get('webpage_backend/posts')
         .then (res => {
             console.log(res)
             setPosts(res.data)
@@ -60,10 +59,6 @@ function ArtiListSect() {
         }, [])
     })
     const history = useHistory();
-    const [query, setQuery] = React.useState('');
-    const handleChange = (event) => {
-        setQuery(event.target.value);
-      };
       console.log(localStorage.getItem('name'))
     return (
         <React.Fragment>
@@ -85,7 +80,7 @@ function ArtiListSect() {
           <Container className={classes.cardGrid} maxWidth="md">
             {/* End hero unit */}
             <Grid container spacing={4}>
-              {posts.map((post) => (
+              {role === "" ? posts.filter(post => post.revised === "1").map((post) => (
                 <Grid item key={post} xs={12} sm={6} md={4}>
                   <Card className={classes.card}>
                     <CardMedia
@@ -108,19 +103,49 @@ function ArtiListSect() {
                     </CardActions>
                   </Card>
                 </Grid>
+              )) : posts.map((post) => (
+                <Grid item key={post} xs={12} sm={6} md={4}>
+                  <Card className={classes.card}>
+                    <CardMedia
+                      className={classes.cardMedia}
+                      image={post.photo}
+                      title="Image title"
+                    />
+                    <CardContent className={classes.cardContent}>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {post.title}
+                      </Typography>
+                      <Typography>
+                        {post.shortDescription}
+                      </Typography>
+                      <Typography>
+                        {post.revised === "1" ? "Aceptado" : post.revised === "2" ? "Sin revisar" : "Rechazado"}
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button size="small" color="primary" onClick={() => history.push({pathname: '/artpg', data: {idPost: post.idPost, title: post.title, shortDescription: post.shortDescription, description: post.description, author: post.author, date: post.date, photo: post.photo, category: post.category, revised: post.revised, video: post.video}})}>
+                        Ver
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
               ))}
             </Grid>
           </Container>
         </main>
         {/* Footer */}
         <footer className={classes.footer}>
-          <Typography variant="h6" align="center" gutterBottom>
-            Footer
-          </Typography>
-          <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-            Something here to give the footer a purpose!
-          </Typography>
-        </footer>
+                <Typography variant="h6" align="center" gutterBottom>
+                    Banco Central de Bolivia
+                </Typography>
+                <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
+                <p>Derechos Reservados ® Banco Central de Bolivia 2011- 2020</p>
+                <p>Teléfono:(591-2) 240 9090 - Fax:(591-2) 266 1590 Línea gratuita: 800 10 2023 - Casilla de Correo: 3118</p>
+                <p>Correo electrónico: bancocentraldebolivia@bcb.gob.bo</p>
+                <p>Calle Ayacucho y Mercado</p>
+                <p>La Paz - Bolivia</p>
+                </Typography>
+            </footer>
         {/* End footer */}
       </React.Fragment>
         )
