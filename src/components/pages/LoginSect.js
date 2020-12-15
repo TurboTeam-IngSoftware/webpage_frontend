@@ -110,7 +110,7 @@ function LoginSect() {
     };
     if (localStorage.getItem('name') !== ''){
         return(
-            <div className='containerlogin'>
+            <Container component="main" maxWidth="xs">
            <h1 className='title'>
                {localStorage.getItem("name") + " " + localStorage.getItem("lastnm")}
            </h1>
@@ -147,10 +147,11 @@ function LoginSect() {
                 onClick={next}
              />
              </Link>}
-            </div>
+             </Container>
         )
     } else {
         return (
+
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <div className={classes.paper}>
