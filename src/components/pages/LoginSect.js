@@ -55,7 +55,7 @@ function LoginSect() {
     const validatePassword = password.length >= 8;
 
     const login = () => {
-        Axios.post('http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/login', {
+        Axios.post('webpage_backend/login', {
                 "email": email,
                 "password": password,
         }).then((response) => {
@@ -124,7 +124,7 @@ function LoginSect() {
                 onClick={logout}
              />
              </Link>
-             <Link to ='/artireded' >
+             <Link to ='/articulos' >
            <ButtonComp 
                 text={'Todos los Artículos'}
                 disabled={false}
@@ -139,7 +139,7 @@ function LoginSect() {
                 onClick={next}
              />
              </Link>}
-             {isEditor &&
+             {(isEditor || isAdmin) &&
              <Link to ='/creararti' >
            <ButtonComp 
                 text={'Crear Artículo'}

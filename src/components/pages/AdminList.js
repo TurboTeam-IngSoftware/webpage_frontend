@@ -36,7 +36,7 @@ export default function AdminList() {
 
   const [users, setUsers]= useState([]);
     useEffect(()=> {
-        axios.get('http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/users')
+        axios.get('webpage_backend/users')
         .then (res => {
             console.log(res)
             setUsers(res.data)
@@ -123,7 +123,7 @@ export default function AdminList() {
                   </TableCell>
                   <TableCell align={'center'}
                   style={{ minWidth: 100 }}>
-                  {user.roles}
+                  {user.roles === "1" ? "Administrador" : user.roles === "2" ? "Editor" : "Revisor"}
                   </TableCell>
                   <TableCell align={'center'}
                   style={{ minWidth: 100 }}>
