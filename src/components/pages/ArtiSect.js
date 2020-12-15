@@ -99,7 +99,7 @@ function ArtiSect() {
                 <strong className='author'>Por: {author} | {date}</strong>
                 <strong className='category'>Categoría: {category}</strong>
                 <strong className='media'>
-                <iframe title='A video' width="1024" height="512" src={video} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe title='A video' width="100%" height="512" src={video} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </strong>
                 <div className='body'> {description}</div>
                 {(isEditor || isAdmin) &&
