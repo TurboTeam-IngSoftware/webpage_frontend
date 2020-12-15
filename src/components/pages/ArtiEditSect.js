@@ -34,7 +34,7 @@ function ArtiEditSect() {
         console.log(response);
     });
     };
-    
+  
     const uploadImage = () => {
         const fd = new FormData();
         fd.append('image', this.state.imagen)
@@ -115,10 +115,10 @@ function ArtiEditSect() {
             />
          
         <input 
-        style={{display: 'none'}}
+        
         type="file"
-        onChange={(e) => {
-            setImagen(e.target.value);
+        onChange={(e)=>{
+            setImagen(e.target.files[0])
         }} 
         //ref={fileInput => this.fileInput = fileInput}
         />
