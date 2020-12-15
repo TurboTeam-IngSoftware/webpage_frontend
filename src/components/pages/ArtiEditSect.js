@@ -30,19 +30,17 @@ function ArtiEditSect() {
         console.log(response);
     });
     };
-    
+  
     const uploadImage = () => {
         const fd = new FormData();
-        fd.append('image', this.state.imagen)
-        Axios.post("http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/posts", fd)
+        fd.append('image', imagen);
+        Axios.post("http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/photos", fd)
         .then(res => {
             console.log(res);
         });
 
     
     }
-
-  
 
     return (
         <div>
@@ -97,10 +95,10 @@ function ArtiEditSect() {
             />
          
         <input 
-        style={{display: 'none'}}
+        
         type="file"
-        onChange={(e) => {
-            setImagen(e.target.value);
+        onChange={(e)=>{
+            setImagen(e.target.files[0])
         }} 
         />
         <ButtonComp 
