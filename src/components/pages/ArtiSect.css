@@ -4,10 +4,19 @@
     align-items: left;
     flex-direction: column;
     width: 80%;
+    height: 100%;
     margin: auto;
     margin-top: 50px;
     margin-bottom: 50px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.mainsection{
+    background-color: blanchedalmond;
+    width: 100%;
+    display: flex;
+    align-items: left;
+    flex-direction: column;
 }
 
 .arttitle{
@@ -51,7 +60,11 @@
 
 .media{
     margin: auto;
-    width: 80%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .body{
@@ -60,4 +73,10 @@
     margin-left: 50px;
     font-size: 24px;
     font-family: Arial, sans-serif;
+}
+
+.video{
+    margin: auto;
+    width: 80%;
+    height:500px;
 }

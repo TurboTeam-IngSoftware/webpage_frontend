@@ -89,7 +89,7 @@ function ArtiSect() {
     };
 
     return (
-        <>
+        <div className = 'mainsection'>
             <div className='artmaincont'>
                 <h1 className='arttitle'>{title}</h1>
                 {isApproved && <h1 className='status'>Artículo Aprobado</h1>} 
@@ -157,7 +157,7 @@ function ArtiSect() {
                 <p>La Paz - Bolivia</p>
                 </Typography>
             </footer>
-        </>
+        </div>
     )
 }
 
