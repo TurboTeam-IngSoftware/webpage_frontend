@@ -1,23 +1,41 @@
 import './ArtiEditSec.css'
 import React, { useState} from 'react'
-import ButtonComp from '../ButtonComp'
-import { Link } from 'react-router-dom';
 import {TextField} from '@material-ui/core'
 import Axios from 'axios'
 import Typography from '@material-ui/core/Typography';
+import { useHistory } from "react-router-dom";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import { makeStyles } from '@material-ui/core/styles';
+import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme) => ({
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 300,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+}));
 
 function ArtiEditSect() {
-
+    let history = useHistory();
+    const classes = useStyles();
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [video, setVideo] = useState("");
     const [descripcorta, setDescripCorta] = useState("");
     const [imagen, setImagen] = useState("");
+    const [category, setCategory] = useState("Economía");
     const today = new Date();
 
     const validTitle = title.length >= 3;
     const validateShortDescription = descripcorta.length >= 30 && descripcorta.length <= 100;
     const validateContent = content.length >= 500 && content.length <= 3000;
+    const validateCategory = category !== '';
 
     function makeid(length) {
         var result = '';
@@ -37,12 +55,13 @@ function ArtiEditSect() {
             author: localStorage.getItem('name')+" "+localStorage.getItem('lastnm'),
             date: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
             photo: "http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/storage/images/posts/" + makeid(10) + ".jpg",
-            category: "economia",
+            category: category,
             revised: "0",
             video: "https://www.youtube.com/embed/"+video.split("=")[1],
     }).then((response) => {
         console.log(response);
     });
+    history.push('/articulos');
     };
   
     const uploadImage = () => {
@@ -65,6 +84,7 @@ function ArtiEditSect() {
             variant="outlined"
             margin="normal"
             required
+            fullWidth
             id="title"
             label="Título"
             name="email"
@@ -80,6 +100,7 @@ function ArtiEditSect() {
             variant="outlined"
             margin="normal"
             required
+            fullWidth
             id="short"
             label="Descripción corta"
             name="email"
@@ -132,20 +153,46 @@ function ArtiEditSect() {
         }} 
         //ref={fileInput => this.fileInput = fileInput}
         />
-        <ButtonComp 
+        <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel id="demo-simple-select-outlined-label">Categoría</InputLabel>
+                <Select
+                    labelId="demo-simple-select-outlined-label"
+                    id="demo-simple-select-outlined"
+                    value={category === "1" ? "Economía" : "Historia"}
+                    onChange={(e) => {
+                        setCategory(e.target.value);
+                    }}
+                    label="Rol"
+                    error={!validateCategory}
+                >
+                <MenuItem value={1}>Economía</MenuItem>
+                <MenuItem value={2}>Historia</MenuItem>
+            </Select>
+        </FormControl>
+        <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
             text={'Subir imagen'}
-            disabled={false}
             onClick={uploadImage}
-            />
-        <Link to ='/artireded' >
-            <ButtonComp 
-                text={'Publicar'}
-                disabled={false}
-                onClick={publish}
-             />
-        </Link>
+        >
+            Subir imagen
+        </Button>
+        <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            text={'Actulizar'}
+            onClick={publish}
+        >
+            Crear artículo
+        </Button>
     </div>
-   : <div> No Tiene Permisos</div> }
+   : <div>No Tiene Permisos</div> }
    </div>
     
     );

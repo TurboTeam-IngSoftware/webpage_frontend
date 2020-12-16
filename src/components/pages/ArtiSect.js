@@ -97,7 +97,7 @@ function ArtiSect() {
                 {isPending && <strong className='status'>Artículo Sin Revisar</strong>} 
                 <strong className='artshort'>"{shortDescription}"</strong>
                 <strong className='author'>Por: {author} | {date}</strong>
-                <strong className='category'>Categoría: {category}</strong>
+                <strong className='category'>Categoría: {category === "1" ? "Economía" : "Historia"}</strong>
                 <strong className='media'>
                 <iframe title='A video' width="100%" height="512" src={video} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </strong>
