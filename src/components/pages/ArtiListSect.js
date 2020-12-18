@@ -17,8 +17,9 @@ const useStyles = makeStyles((theme) => ({
       marginRight: theme.spacing(2),
     },
     heroContent: {
-      backgroundColor: theme.palette.background.paper,
+      background: 'linear-gradient(45deg, #4287f5 30%, #FF8E53 90%)',
       padding: theme.spacing(8, 0, 6),
+      color: 'white',
     },
     heroButtons: {
       marginTop: theme.spacing(4),
@@ -33,14 +34,15 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
     },
     cardMedia: {
-      paddingTop: '56.25%', // 16:9
+      paddingTop: '56.25%',
     },
     cardContent: {
       flexGrow: 1,
     },
     footer: {
-      backgroundColor: theme.palette.background.paper,
+      background: 'linear-gradient(45deg, #4287f5 30%, #FF8E53 90%)',
       padding: theme.spacing(6),
+      color: 'white',
     },
   }));
 
@@ -67,13 +69,11 @@ function ArtiListSect() {
           {/* Hero unit */}
           <div className={classes.heroContent}>
             <Container maxWidth="sm">
-              <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+              <Typography component="h1" variant="h2" align="center" color="white" gutterBottom>
                 BCB Educa
               </Typography>
-              <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                Something short and leading about the collection below—its contents, the creator, etc.
-                Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-                entirely.
+              <Typography variant="h5" align="center" color="white" paragraph>
+                Artículos informativos y educativos
               </Typography>
             </Container>
           </div>
@@ -138,7 +138,7 @@ function ArtiListSect() {
                 <Typography variant="h6" align="center" gutterBottom>
                     Banco Central de Bolivia
                 </Typography>
-                <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
+                <Typography variant="subtitle1" align="center" color="white" component="p">
                 <p>Derechos Reservados ® Banco Central de Bolivia 2011- 2020</p>
                 <p>Teléfono:(591-2) 240 9090 - Fax:(591-2) 266 1590 Línea gratuita: 800 10 2023 - Casilla de Correo: 3118</p>
                 <p>Correo electrónico: bancocentraldebolivia@bcb.gob.bo</p>

@@ -1,5 +1,4 @@
 .artmaincont{
-    background-color: rgb(255, 255, 255);
     display: flex;
     align-items: left;
     flex-direction: column;
@@ -12,7 +11,6 @@
 }
 
 .mainsection{
-    background-color: blanchedalmond;
     width: 100%;
     display: flex;
     align-items: left;

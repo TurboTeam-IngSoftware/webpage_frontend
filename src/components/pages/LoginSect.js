@@ -14,7 +14,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
 
 function LoginSect() {
     const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
@@ -78,23 +77,22 @@ function LoginSect() {
     }
 
     const useStyles = makeStyles((theme) => ({
-        paper: {
-            marginTop: theme.spacing(8),
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-        },
-        avatar: {
-            margin: theme.spacing(1),
-            backgroundColor: theme.palette.secondary.main,
-        },
-        form: {
-            width: '100%',
-            marginTop: theme.spacing(1),
-        },
-        submit: {
-            margin: theme.spacing(3, 0, 2),
-        },
+        root: {
+            background: (props) =>
+              props.color === 'red'
+                ? 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
+                : 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+            border: 0,
+            borderRadius: 3,
+            boxShadow: (props) =>
+              props.color === 'red'
+                ? '0 3px 5px 2px rgba(255, 105, 135, .3)'
+                : '0 3px 5px 2px rgba(33, 203, 243, .3)',
+            color: 'white',
+            height: 48,
+            padding: '0 30px',
+            margin: 8,
+          },
     }));
 
     const classes = useStyles();
@@ -106,57 +104,72 @@ function LoginSect() {
         console.log(localStorage.getItem('role'))
         console.log(localStorage.getItem('name'))
         console.log(localStorage.getItem('lastnm'))
-    
+        history.push('/articulos');
+    };
+    const usuarios = () => {
+        history.push('/listausuarios')
+    };
+    const crear = () => {
+        history.push('/creararti')
     };
     if (localStorage.getItem('name') !== ''){
         return(
-            <Container component="main" maxWidth="xs">
-           <h1 className='title'>
+        <div class="main">
+        <Container component="main" maxWidth="xs">
+        <div class="paper">
+           <h1>
                {localStorage.getItem("name") + " " + localStorage.getItem("lastnm")}
            </h1>
            <p>
                 {roleIdentificator()}
            </p>
-           <Link to ='/login' >
-           <ButtonComp 
+            {isAdmin &&
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.root}
                 text={'Logout'}
-                disabled={false}
+                onClick={usuarios}
+            >
+                Usuarios
+            </Button>
+            }
+            {(isEditor || isAdmin) &&
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.root}
+                text={'Crear'}
+                onClick={crear}
+            >
+                Crear artículo
+            </Button>}
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.root}
+                text={'Logout'}
                 onClick={logout}
-             />
-             </Link>
-             <Link to ='/articulos' >
-           <ButtonComp 
-                text={'Todos los Artículos'}
-                disabled={false}
-                onClick={next}
-             />
-             </Link>
-             {isAdmin &&
-             <Link to ='/listausuarios' >
-           <ButtonComp 
-                text={'Ver Usuarios'}
-                disabled={false}
-                onClick={next}
-             />
-             </Link>}
-             {(isEditor || isAdmin) &&
-             <Link to ='/creararti' >
-           <ButtonComp 
-                text={'Crear Artículo'}
-                disabled={false}
-                onClick={next}
-             />
-             </Link>}
-             </Container>
+            >
+                Cerrar Sesión
+            </Button>
+            </div>
+        </Container>
+    </div>
         )
     } else {
         return (
-
+            <div class='main'>
             <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <div className={classes.paper}>
+                <div class='paper'>
                     <Typography component="h1" variant="h5">
-                    Log in.
+                    Iniciar sesión
                     </Typography>
                     
                     <TextField
@@ -196,7 +209,7 @@ function LoginSect() {
                         fullWidth
                         variant="contained"
                         color="primary"
-                        className={classes.submit}
+                        className={classes.root}
                         text={'Login'}
                         onClick={login}
                         disabled={!(validateEmail && validatePassword)}
@@ -223,7 +236,8 @@ function LoginSect() {
                         </DialogActions>
                     </Dialog>
                 </div>
-                </Container>
+            </Container>
+            </div>
         )
     }
 }

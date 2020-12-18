@@ -20,14 +20,23 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
-    },
-  }));
+    root: {
+        background: (props) =>
+          props.color === 'red'
+            ? 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
+            : 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+        border: 0,
+        borderRadius: 3,
+        boxShadow: (props) =>
+          props.color === 'red'
+            ? '0 3px 5px 2px rgba(255, 105, 135, .3)'
+            : '0 3px 5px 2px rgba(33, 203, 243, .3)',
+        color: 'white',
+        height: 48,
+        padding: '0 30px',
+        margin: 8,
+      },
+}));
 
 function EditDeleteUsers() {
     const location = useLocation();
@@ -86,10 +95,11 @@ function EditDeleteUsers() {
    
 
     return (
+        <div class='main'>
         <Container component="main" maxWidth="xs">
-            <CssBaseline />
+        <div class='paper'>
             {localStorage.getItem("role") === "1" ?
-                <div className={classes.paper}>
+                <div>
                     <Typography component="h1" variant="h5">
                     Editar usuario
                     </Typography>
@@ -187,7 +197,7 @@ function EditDeleteUsers() {
                             setReTypedPassword(e.target.value);
                         }}
                     />
-                    <FormControl variant="outlined" className={classes.formControl}>
+                    <FormControl variant="outlined">
                         <InputLabel id="demo-simple-select-outlined-label">Rol</InputLabel>
                         <Select
                             labelId="demo-simple-select-outlined-label"
@@ -209,7 +219,7 @@ function EditDeleteUsers() {
                         fullWidth
                         variant="contained"
                         color="primary"
-                        className={classes.submit}
+                        className={classes.root}
                         text={'Crear usuario'}
                         onClick={editUser}
                         disabled={!(validateEmail && validatePassword && validateReTypedPassword && validateNames && validateLastnames)}
@@ -220,8 +230,8 @@ function EditDeleteUsers() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        color="primary"
-                        className={classes.submit}
+                        color="red"
+                        className={classes.root}
                         text={'Crear usuario'}
                         onClick={handleClickOpen}
                         disabled={false}
@@ -250,7 +260,9 @@ function EditDeleteUsers() {
                         </DialogActions>
                     </Dialog>
             </div> : <div><p>No tiene permisos para realizar esta función</p></div>}
+            </div>
         </Container>
+        </div>
     )
 }
 
