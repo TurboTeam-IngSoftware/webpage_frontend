@@ -56,16 +56,15 @@ function ArtiListSect() {
     var role = localStorage.getItem("role");
     const [posts, setPosts]= useState([]);
     const classes = useStyles();
-    useEffect(()=> {
+    function useEffectt(){
         axios.get('webpage_backend/posts')
         .then (res => {
             console.log(res)
             setPosts(res.data)
-        })
-        .catch (err => {
-            console.log(err)
-        }, [])
-    })
+        });
+    }
+    useEffectt();
+    
     const [catFil, setCatFil] = useState("");
     const filtrar = (event) => {
         setCatFil(event.target.value);
@@ -78,11 +77,13 @@ function ArtiListSect() {
       }
       
     }
-    const [searchFil, setSearchFil] = useState("");
+
+    const [searchFil, setSearchFil] = useState("");    
+    
     const handleSearchChange = (e) => {
       setSearchFil(e.target.value);
       console.log("Buscando...")
-      const postIncludes = posts.map(post => post.title.includes(searchFil));
+       const postIncludes = posts.map(post => post.title.includes(searchFil));
       if(postIncludes){
         setPosts(posts.filter(post => post.title.includes(searchFil)))
       }
@@ -127,7 +128,7 @@ function ArtiListSect() {
             {/* End hero unit */}
             <Grid container spacing={4}>
              
-              {role === "" ?  posts.filter(post => post.revised === "1" ).map((post) => (
+              {role === "" ?  posts.filter(post => post.revised === "1").map((post) => (
                 
                 <Grid item key={post} xs={12} sm={6} md={4}>
                   

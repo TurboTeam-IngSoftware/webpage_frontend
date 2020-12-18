@@ -20,7 +20,7 @@ function Navbar() {
           <div className='navbar-container container'>
             <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
                 <img src={bcblogo} alt='logo' className='navbar-icon'/>
-              BCB TEst
+              BCB
             </Link>
             <div className='menu-icon' onClick={handleClick}>
               {click ? <FaTimes /> : <FaBars />}
