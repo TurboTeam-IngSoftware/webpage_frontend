@@ -6,11 +6,17 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import { useHistory } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
+import SearchIcon from "@material-ui/icons/Search";
+import {TextField} from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -60,8 +66,30 @@ function ArtiListSect() {
             console.log(err)
         }, [])
     })
+    const [catFil, setCatFil] = useState("");
+    const filtrar = (event) => {
+        setCatFil(event.target.value);
+      if(catFil === "1") {
+        setPosts(posts.filter(post => post.category === "1"))
+        console.log("Categorias filtradas: Economia")
+      }else {
+        setPosts(posts.filter(post => post.category === "2"))
+        console.log("Categorias filtradas: Historia")
+      }
+      
+    }
+    const [searchFil, setSearchFil] = useState("");
+    const handleSearchChange = (e) => {
+      setSearchFil(e.target.value);
+      console.log("Buscando...")
+      const postIncludes = posts.map(post => post.title.includes(searchFil));
+      if(postIncludes){
+        setPosts(posts.filter(post => post.title.includes(searchFil)))
+      }
+    };
     const history = useHistory();
       console.log(localStorage.getItem('name'))
+      
     return (
         <React.Fragment>
         <CssBaseline />
@@ -77,11 +105,32 @@ function ArtiListSect() {
               </Typography>
             </Container>
           </div>
+          <SearchIcon className={classes.searchIcon} />
+            <TextField
+              className={classes.searchInput}
+              onChange={handleSearchChange}
+              />
+          <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel id="demo-simple-select-outlined-label">Filtrar por categoría</InputLabel>
+                <Select
+                    labelId="demo-simple-select-outlined-label"
+                    id="demo-simple-select-outlined"
+                    value={catFil}
+                     onChange={filtrar}
+                >
+                <MenuItem value={1}>Economía</MenuItem>
+                <MenuItem value={2}>Historia</MenuItem>
+                
+            </Select>
+        </FormControl>
           <Container className={classes.cardGrid} maxWidth="md">
             {/* End hero unit */}
             <Grid container spacing={4}>
-              {role === "" ? posts.filter(post => post.revised === "1").map((post) => (
+             
+              {role === "" ?  posts.filter(post => post.revised === "1" ).map((post) => (
+                
                 <Grid item key={post} xs={12} sm={6} md={4}>
+                  
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.cardMedia}
