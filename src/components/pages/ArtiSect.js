@@ -11,7 +11,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-function ArtiSect() {
+export default function ArtiSect() {
     const isAdmin = (localStorage.getItem('role') === "1");
     const isEditor = (localStorage.getItem('role') === "2");
     const isRevisor = (localStorage.getItem('role') === "3");
@@ -160,5 +160,3 @@ function ArtiSect() {
         </div>
     )
 }
-
-export default ArtiSect
