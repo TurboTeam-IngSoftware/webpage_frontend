@@ -41,10 +41,7 @@ export default function AdminList() {
             console.log(res)
             setUsers(res.data)
         })
-        .catch (err => {
-            console.log(err)
-        }, [])
-    })
+    }, [])
     const history = useHistory();
 
     const classes = useStyles();

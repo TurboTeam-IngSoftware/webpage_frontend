@@ -52,18 +52,18 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-function ArtiListSect() {
+export default function ArtiListSect() {
     var role = localStorage.getItem("role");
     const [posts, setPosts]= useState([]);
     const classes = useStyles();
-    function useEffectt(){
+
+    useEffect(()=>{
         axios.get('webpage_backend/posts')
         .then (res => {
             console.log(res)
             setPosts(res.data)
         });
-    }
-    useEffectt();
+    }, []);
     
     const [catFil, setCatFil] = useState("");
     const filtrar = (event) => {
@@ -200,5 +200,3 @@ function ArtiListSect() {
       </React.Fragment>
         )
 }
-
-export default ArtiListSect
