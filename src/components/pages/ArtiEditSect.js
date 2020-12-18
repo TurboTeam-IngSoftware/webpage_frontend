@@ -28,7 +28,6 @@ function ArtiEditSect() {
     const [content, setContent] = useState("");
     const [video, setVideo] = useState("");
     const [descripcorta, setDescripCorta] = useState("");
-    const [imagen, setImagen] = useState("");
     const [category, setCategory] = useState("Economía");
     const today = new Date();
 
@@ -37,15 +36,15 @@ function ArtiEditSect() {
     const validateContent = content.length >= 500 && content.length <= 3000;
     const validateCategory = category !== '';
 
-    function makeid(length) {
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for ( var i = 0; i < length; i++ ) {
-           result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-        return result;
-    }
+   // function makeid(length) {
+   //     var result = '';
+   //     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   //     var charactersLength = characters.length;
+   //     for ( var i = 0; i < length; i++ ) {
+   //        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   //     }
+   //     return result;
+   // }
 
     const publish = () => {
         Axios.post("webpage_backend/posts", {
@@ -54,7 +53,7 @@ function ArtiEditSect() {
             description: content,
             author: localStorage.getItem('name')+" "+localStorage.getItem('lastnm'),
             date: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
-            photo: "http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/storage/images/posts/" + makeid(10) + ".jpg",
+            photo: fileBase64String,
             category: category,
             revised: "0",
             video: "https://www.youtube.com/embed/"+video.split("=")[1],
@@ -63,15 +62,33 @@ function ArtiEditSect() {
     });
     history.push('/articulos');
     };
-  
-    const uploadImage = () => {
-        const fd = new FormData();
-        fd.append('image', imagen);
-        Axios.post("webpage_backend/photos", fd)
-        .then(res => {
-            console.log(res);
-        })
-    }
+
+        const [selectetdFile, setSelectedFile] = useState([]);
+        const [fileBase64String, setFileBase64String] = useState("");
+      
+        const onFileChange = (e) => {
+          setSelectedFile(e.target.files);
+          console.log(e.target.files[0]);
+          console.log(e.target.files[0].name);
+          console.log(e.target.files[0].size);
+          console.log(e.target.files[0].type);
+        };
+      
+        const encodeFileBase64 = (file) => {
+          var reader = new FileReader();
+          if (file) {
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+              var Base64 = reader.result;
+              console.log(Base64);
+              setFileBase64String(Base64);
+            };
+            reader.onerror = (error) => {
+              console.log("error: ", error);
+            };
+          }
+        };
+      
 
     return (
         <div>
@@ -146,12 +163,9 @@ function ArtiEditSect() {
             />
          
         <input 
-        
         type="file"
-        onChange={(e)=>{
-            setImagen(e.target.files[0])
-        }} 
-        //ref={fileInput => this.fileInput = fileInput}
+        onChange={onFileChange} 
+       
         />
         <FormControl variant="outlined" className={classes.formControl}>
             <InputLabel id="demo-simple-select-outlined-label">Categoría</InputLabel>
@@ -176,7 +190,7 @@ function ArtiEditSect() {
             color="primary"
             className={classes.submit}
             text={'Subir imagen'}
-            onClick={uploadImage}
+            onClick={encodeFileBase64(selectetdFile[0])}
         >
             Subir imagen
         </Button>

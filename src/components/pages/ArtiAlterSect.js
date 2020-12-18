@@ -32,7 +32,6 @@ function ArtiAlterSect() {
     const [video, setVideo] = useState(post.video);
     const [descripcorta, setDescripCorta] = useState(post.shortDescription);
     const [category, setCategory] = useState("Economía");
-    const [imagen, setImagen] = useState("");
     const validateCategory = category !== '';
     const today = new Date();
 
@@ -40,24 +39,42 @@ function ArtiAlterSect() {
     const validateShortDescription = descripcorta.length >= 30 && descripcorta.length <= 100;
     const validateContent = content.length >= 500 && content.length <= 3000;
 
-    const uploadImage = () => {
-        const fd = new FormData();
-        fd.append('image', imagen);
-        Axios.post("webpage_backend/photos", fd)
-        .then(res => {
-            console.log(res);
-        })
-    }
+    const [selectetdFile, setSelectedFile] = useState([]);
+    const [fileBase64String, setFileBase64String] = useState("");
+  
+    const onFileChange = (e) => {
+      setSelectedFile(e.target.files);
+      console.log(e.target.files[0]);
+      console.log(e.target.files[0].name);
+      console.log(e.target.files[0].size);
+      console.log(e.target.files[0].type);
+    };
+  
+    const encodeFileBase64 = (file) => {
+      var reader = new FileReader();
+      if (file) {
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          var Base64 = reader.result;
+          console.log(Base64);
+          setFileBase64String(Base64);
+        };
+        reader.onerror = (error) => {
+          console.log("error: ", error);
+        };
+      }
+    };
+  
 
-    function makeid(length) {
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for ( var i = 0; i < length; i++ ) {
-           result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-        return result;
-    }
+    // function makeid(length) {
+    //     var result = '';
+    //     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    //     var charactersLength = characters.length;
+    //     for ( var i = 0; i < length; i++ ) {
+    //        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    //     }
+    //     return result;
+    // }
 
     const update = () => {
         Axios.put("webpage_backend/posts", {
@@ -67,7 +84,7 @@ function ArtiAlterSect() {
             description: content,
             author: localStorage.getItem('name')+" "+localStorage.getItem('lastnm'),
             date: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
-            photo: "http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/storage/images/posts/" + makeid(10) + ".jpg",
+            photo: fileBase64String,
             category: category,
             revised: "0",
             video: "https://www.youtube.com/embed/"+video.split("=")[1],
@@ -154,10 +171,8 @@ function ArtiAlterSect() {
         <input 
         
         type="file"
-        onChange={(e)=>{
-            setImagen(e.target.files[0])
-        }} 
-        //ref={fileInput => this.fileInput = fileInput}
+        onChange={onFileChange} 
+ 
         />
         <FormControl variant="outlined" className={classes.formControl}>
             <InputLabel id="demo-simple-select-outlined-label">Categoría</InputLabel>
@@ -182,7 +197,7 @@ function ArtiAlterSect() {
             color="primary"
             className={classes.submit}
             text={'Subir imagen'}
-            onClick={uploadImage}
+            onClick={encodeFileBase64(selectetdFile[0])}
         >
             Subir imagen
         </Button>
