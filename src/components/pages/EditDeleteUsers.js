@@ -89,7 +89,15 @@ function EditDeleteUsers() {
             }
         }).then((response) => {
         console.log(response);
-        history.push('/listausuarios');
+        if (user.email === email) {
+            localStorage.setItem('role', '');
+            localStorage.setItem('name', '');
+            localStorage.setItem('lastnm', '');
+            history.push('/login');
+            window.location.reload();
+        } else {
+            history.push('/listausuarios');
+        }
     });
     };
    
@@ -252,7 +260,7 @@ function EditDeleteUsers() {
                         </DialogContent>
                         <DialogActions>
                         <Button onClick={deleteUser} color="primary" autoFocus>
-                            AceptarhandleClose
+                            Aceptar
                         </Button>
                         <Button onClick={handleClose} color="primary" autoFocus>
                             Cancelar

@@ -183,17 +183,7 @@ function ArtiEditSect() {
                 <MenuItem value={2}>Historia</MenuItem>
             </Select>
         </FormControl>
-        <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            text={'Subir imagen'}
-            onClick={encodeFileBase64(selectetdFile[0])}
-        >
-            Subir imagen
-        </Button>
+
         <Button
             type="submit"
             fullWidth
@@ -201,7 +191,7 @@ function ArtiEditSect() {
             color="primary"
             className={classes.submit}
             text={'Actulizar'}
-            onClick={publish}
+            onClick={encodeFileBase64(selectetdFile[0]), publish}
         >
             Crear artículo
         </Button>

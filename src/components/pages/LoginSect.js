@@ -71,7 +71,7 @@ function LoginSect() {
                 console.log(localStorage.getItem('role'))
                 console.log(localStorage.getItem('name'))
                 console.log(localStorage.getItem('lastnm'))
-                history.push('/')
+                window.location.reload();
             }
         });
     }
@@ -98,13 +98,10 @@ function LoginSect() {
     const classes = useStyles();
 
     const logout = () => {
-        localStorage.setItem('role', '')
-        localStorage.setItem('name', '')
-        localStorage.setItem('lastnm', '')
-        console.log(localStorage.getItem('role'))
-        console.log(localStorage.getItem('name'))
-        console.log(localStorage.getItem('lastnm'))
-        history.push('/articulos');
+        localStorage.setItem('role', '');
+        localStorage.setItem('name', '');
+        localStorage.setItem('lastnm', '');
+        window.location.reload();
     };
     const usuarios = () => {
         history.push('/listausuarios')

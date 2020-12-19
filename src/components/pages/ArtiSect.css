@@ -7,6 +7,7 @@
     margin: auto;
     margin-top: 50px;
     margin-bottom: 50px;
+    background-color: azure;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -15,6 +16,8 @@
     display: flex;
     align-items: left;
     flex-direction: column;
+    background: rgb(81,129,190);
+    background: linear-gradient(90deg, rgba(81,129,190,1) 0%, rgba(44,74,171,1) 51%, rgba(0,56,255,1) 100%);
 }
 
 .arttitle{
@@ -80,4 +83,8 @@
     margin: auto;
     width: 80%;
     height:500px;
+}
+
+footer {
+    color: rgb(255, 255, 255);
 }
