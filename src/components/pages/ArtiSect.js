@@ -29,6 +29,7 @@ export default function ArtiSect() {
     const revised = post.revised;
     const video = post.video;
     const idPost = post.idPost;
+    const photo = post.photo;
 
     const isApproved = (revised === "1" && (isEditor || isRevisor));
     const isRejected = (revised === "2" && (isEditor || isRevisor));
@@ -42,7 +43,7 @@ export default function ArtiSect() {
             description: description,
             author: author,
             date: Date().toLocaleString(),
-            photo: "http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/storage/images/posts/serj.jpg",
+            photo: photo,
             category: category,
             revised: "1",
             video: video,
@@ -59,7 +60,7 @@ export default function ArtiSect() {
             description: description,
             author: author,
             date: Date().toLocaleString(),
-            photo: "http://skynet.lp.upb.edu/~pbruckner18/webpage_backend/storage/images/posts/serj.jpg",
+            photo: photo,
             category: category,
             revised: "2",
             video: video,
