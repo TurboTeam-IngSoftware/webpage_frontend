@@ -40,7 +40,7 @@ function ArtiAlterSect() {
     const validateContent = content.length >= 500 && content.length <= 3000;
 
     const [selectetdFile, setSelectedFile] = useState([]);
-    const [fileBase64String, setFileBase64String] = useState("");
+    const [fileBase64String, setFileBase64String] = useState(post.photo);
   
     const onFileChange = (e) => {
       setSelectedFile(e.target.files);
@@ -64,19 +64,12 @@ function ArtiAlterSect() {
         };
       }
     };
-  
-
-    // function makeid(length) {
-    //     var result = '';
-    //     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    //     var charactersLength = characters.length;
-    //     for ( var i = 0; i < length; i++ ) {
-    //        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    //     }
-    //     return result;
-    // }
-
+    var vidtemp = post.video;
     const update = () => {
+        
+        if(post.video !== video){
+           vidtemp = "https://www.youtube.com/embed/"+video.split("=")[1];
+        }
         Axios.put("webpage_backend/posts", {
             idPost: post.idPost,
             title: title,
@@ -87,7 +80,7 @@ function ArtiAlterSect() {
             photo: fileBase64String,
             category: category,
             revised: "0",
-            video: "https://www.youtube.com/embed/"+video.split("=")[1],
+            video: vidtemp,
         }).then((response) => {
             console.log(response);
         });
@@ -160,6 +153,7 @@ function ArtiAlterSect() {
             margin='normal'
             fullWidth
             id='video'
+            defaultValue = {video}
             type='url'
             label="Link de video (opcional)"
             color="primary"

@@ -169,7 +169,7 @@ export default function ArtiListSect() {
                         {post.shortDescription}
                       </Typography>
                       <Typography>
-                        {post.revised === "1" ? "Aceptado" : post.revised === "2" ? "Sin revisar" : "Rechazado"}
+                        {post.revised === "1" ? "Aceptado" : post.revised === "0" ? "Sin revisar" : "Rechazado"}
                       </Typography>
                     </CardContent>
                     <CardActions>
