@@ -50,6 +50,14 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(6),
       color: 'white',
     },
+    searchInput: {
+      margin: 'auto',
+      width: '100%',
+      alignItems:'center',
+    },
+    input: {
+      width: '200',
+    }
   }));
 
 export default function ArtiListSect() {
@@ -106,24 +114,26 @@ export default function ArtiListSect() {
               </Typography>
             </Container>
           </div>
+          <div className={classes.searchInput}>
           <SearchIcon className={classes.searchIcon} />
             <TextField
-              className={classes.searchInput}
               onChange={handleSearchChange}
+              className={classes.input}
               />
           <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel id="demo-simple-select-outlined-label">Filtrar por categoría</InputLabel>
+            <InputLabel id="demo-simple-select-outlined-label" className={classes.category}>Filtrar por categoría</InputLabel>
                 <Select
                     labelId="demo-simple-select-outlined-label"
                     id="demo-simple-select-outlined"
                     value={catFil}
-                     onChange={filtrar}
+                    onChange={filtrar}
                 >
                 <MenuItem value={1}>Economía</MenuItem>
                 <MenuItem value={2}>Historia</MenuItem>
                 
             </Select>
         </FormControl>
+        </div>
           <Container className={classes.cardGrid} maxWidth="md">
             {/* End hero unit */}
             <Grid container spacing={4}>

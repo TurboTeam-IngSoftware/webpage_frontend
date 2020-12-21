@@ -19,6 +19,11 @@ const useStyles = makeStyles((theme) => ({
     selectEmpty: {
       marginTop: theme.spacing(2),
     },
+    submit: {
+        marginTop: 30,
+        margin: 'auto',
+        width: 'auto',
+    }
 }));
 
 function ArtiEditSect() {

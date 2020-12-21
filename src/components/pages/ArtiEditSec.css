@@ -9,8 +9,10 @@
 .containerArtiEdit{
     margin: 70px;
     display: flex;
+    margin: auto;
+    margin-top: 100px;
+    padding-bottom: 100px;
     width: 90%;
     flex-direction: column;
     align-items: center;
-    background-color: blanchedalmond;
 }

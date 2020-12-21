@@ -20,6 +20,11 @@ const useStyles = makeStyles((theme) => ({
     selectEmpty: {
       marginTop: theme.spacing(2),
     },
+    submit: {
+        marginTop: 30,
+        margin: 'auto',
+        width: 'auto',
+    }
   }));
 
 function ArtiAlterSect() {
@@ -190,19 +195,8 @@ function ArtiAlterSect() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            text={'Subir imagen'}
-            onClick={encodeFileBase64(selectetdFile[0])}
-        >
-            Subir imagen
-        </Button>
-        <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
             text={'Actulizar'}
-            onClick={update}
+            onClick={encodeFileBase64(selectetdFile[0]), update}
         >
             Actualizar
         </Button>
